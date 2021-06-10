@@ -1,2 +1,2 @@
 # Signup-Webpage
-Final collaborative project with Fanshu Meng and Eesha Dawoodia for Trent University Class 3420H - Summer 2021
+Final collaborative project between Devashish Kapoor, Fanshu Meng, Eesha Dawoodia for Trent University Class 3420H - Summer 2021

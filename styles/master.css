@@ -1,0 +1,24 @@
+/* @import url("reset.css");*/ /* import reset */
+/* import google font */
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+:root {
+  /* the html element*/
+
+  /* set variables */
+  
+  /* fallback for browsers that don't support variables */
+  color: lightblue;
+  background-color:lightgray;
+  background-color: var(--dark);
+  color: var(--dark);
+  font-family: "Lato", sans-serif;
+}
+
+/* Header */
+h1 {
+  font-family: 'Arimo', sans-serif;
+}
+
+/* Footer */
