@@ -5,16 +5,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
 :root {
   /* set variables */
-  --blacktint: #0A0A0B;
+  --offblack: #0A0A0B;
   --dullblue: #0B3954;
   --bluetint: #BFD7EA;
   --softgray: #848B8E;
-  --white: #FEFFFE;
-  /* fallback for browsers that don't support variables */
-  color: #FEFffE;
-  background-color: #BFD7EA;
+  --offwhite: #FEFFFE;
+
   font-family: "Lato", sans-serif;
-  font-size: 1em;
+  color: var(--offwhite);
+  /* background-image: radial-gradient(circle at center, var(--offwhite), var(--bluetint)); */
+  background-image: linear-gradient(to top left, var(--dullblue), var(--offwhite) 110%);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 }
 body {
   padding: 1rem;
@@ -23,34 +26,46 @@ body {
 header, footer {
   font-family: 'Arimo', sans-serif;
   font-size: 2rem;
-  color: var(--softgray);
+  color: var(--offblack);
+  background-image: linear-gradient(to right, var(--bluetint), var(--offwhite));
+  filter: drop-shadow(0.3rem 0.3rem 0.2rem var(--offblack));
   display: flex;
-  border-radius: 1rem;
+  border-radius: 0.5em;
 }
 /* header */
 header {
-  background-image: linear-gradient(to top, var(--bluetint), var(--white));
   justify-content: space-between;
   padding: 0.5rem;
 }
-header nav { min-width: 40%; }
-header nav ul {
+header h1 { align-self: center;}
+header ul {
   font-size: 1.5rem;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
-
+header li {
+  background-color: var(--dullblue);
+  border: 0.05em solid var(--softgray);
+  border-radius: 1em;
+  padding: 0.1em 0.5em;
+  margin: 0em 0.2em;
+}
+header a { 
+  text-decoration: none;
+  color: var(--offwhite);
+}
+header a:hover { color: greenyellow; }
 /* main */
 main {
-  background-image: linear-gradient(to top left, var(--dullblue), var(--white));
+  color: var(--offblack);
+  background-color: var(--offwhite);
   border-radius: 1rem;
   padding: 1rem;
-  margin: 0.5rem 0rem;
+  margin: 1rem 0rem;
 }
 /* footer */
 footer {
   font-size: 1rem;
-  background-image: linear-gradient(to bottom, var(--bluetint), var(--white));
   justify-content: center;
 }
