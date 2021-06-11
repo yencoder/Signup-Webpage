@@ -1,24 +1,56 @@
-/* @import url("reset.css");*/ /* import reset */
+@import url("reset.css"); /* import reset */
 /* import google font */
 @import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
 :root {
-  /* the html element*/
-
   /* set variables */
-  
+  --blacktint: #0A0A0B;
+  --dullblue: #0B3954;
+  --bluetint: #BFD7EA;
+  --softgray: #848B8E;
+  --white: #FEFFFE;
   /* fallback for browsers that don't support variables */
-  color: lightblue;
-  background-color:lightgray;
-  background-color: var(--dark);
-  color: var(--dark);
+  color: #FEFffE;
+  background-color: #BFD7EA;
   font-family: "Lato", sans-serif;
+  font-size: 1em;
 }
-
-/* Header */
-h1 {
+body {
+  padding: 1rem;
+}
+/* header & footer */
+header, footer {
   font-family: 'Arimo', sans-serif;
+  font-size: 2rem;
+  color: var(--softgray);
+  display: flex;
+  border-radius: 1rem;
+}
+/* header */
+header {
+  background-image: linear-gradient(to top, var(--bluetint), var(--white));
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+header nav { min-width: 40%; }
+header nav ul {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
-/* Footer */
+/* main */
+main {
+  background-image: linear-gradient(to top left, var(--dullblue), var(--white));
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0.5rem 0rem;
+}
+/* footer */
+footer {
+  font-size: 1rem;
+  background-image: linear-gradient(to bottom, var(--bluetint), var(--white));
+  justify-content: center;
+}
