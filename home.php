@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://kit.fontawesome.com/c51f44d97a.js" crossorigin="anonymous"></script>
     <?php $page_title = "Sign Up 101"; ?>
     <?php include "includes/metadata.php" ?>
     <link rel="stylesheet" href="styles/home.css" />
@@ -10,8 +11,7 @@
     <!-- Sign up content -->
     <section>
       <h2>Group Organizing Made Easy</h2>
-      <button id="signup" name="singup">Sign up</button>
-      <i class="fas fa-pencil-alt"></i>
+      <a href="signup.html"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
     </section>
     <!-- What we Offer -->
     <section>
