@@ -1,0 +1,79 @@
+@import url("reset.css"); /*import reset*/
+/* import google font */
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+/*:root{
+    --grey: #1446a3;
+    --white: #fefffe;
+
+    background-color: #0b3954;
+    background-color: #fefffe;
+}*/
+html{
+    background: linear-gradient(to bottom right,#fefffe ,#0b3954);  
+}
+body{
+    background-color: white;
+    border: solid grey;
+    border-radius: 1em;
+    box-shadow: 0.2em 0.3em #0b3954;
+
+    text-align: center;
+    width: fit-content;
+    display: inline-block;
+    margin-top: 10em;
+    margin-left: 30em;
+    margin-bottom: 11em;
+}
+header{
+    font-size: 1.7em;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5em;
+    margin: 1em 1em;
+}
+.input label{
+    margin-bottom: 0.2em;
+}
+input{
+    border-style: none;
+    border-radius: 2em;
+    background-color: #bfd7ea;
+    line-height: 2.5em;
+    padding-left: 0.8em;
+    padding-right: 0.5em;
+    outline: none;
+}
+::placeholder{
+    padding-left: 0.5em;
+}
+textarea{
+    background-color: #bfd7ea;
+}
+fieldset{
+    display: flex;
+    justify-content: space-around;
+}
+legend{
+    font-size: 1.5em;
+}
+fieldset div{
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+button{
+    background-color: #0b3954;
+    border-radius: 2em;
+    color: white;
+    margin-bottom: 0.6em;
+    margin-top: 0.5em;
+    font-size: 1em;
+    padding:0.3em 0.9em;
+}
+button:hover{
+    background-color: #061d2b;
+}
