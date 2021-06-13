@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php $page_title = "Collab 101"; ?>
+    <?php $page_title = "Sign Up 101"; ?>
     <?php include "includes/metadata.php" ?>
   </head>
   <body>
@@ -15,6 +15,7 @@
     <!-- What we Offer -->
     <section>
       <h2>What we Offer</h2>
+      <p>A fast and easy way to organize, blah blah blah</p>
     </section>
     <!-- About us -->
     <section>
