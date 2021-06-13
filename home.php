@@ -10,7 +10,7 @@
     <!-- Sign up content -->
     <section>
       <h2>Group Organizing Made Easy</h2>
-      <button>Sign up</button>
+      <button id="signup" name="singup">Sign up</button>
       <i class="fas fa-pencil-alt"></i>
     </section>
     <!-- What we Offer -->
