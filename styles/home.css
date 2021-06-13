@@ -1,0 +1,32 @@
+/* import google font */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+/* main */
+section {
+  color: var(--offblack);
+  background-color: var(--offwhite);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+h2 {
+  font-family: 'Comfortaa', cursive;
+  font-size: 3rem;
+}
+section:first-child {
+  align-items: center;
+  padding: 5em;
+}
+section:nth-child(2) p {
+  padding: 1rem;
+}
+section:last-child {
+  font-family: 'Indie Flower', cursive;
+}
+section:last-child h2 {
+  align-self: center;
+  font-size: 2em;
+}

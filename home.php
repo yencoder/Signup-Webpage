@@ -3,6 +3,7 @@
   <head>
     <?php $page_title = "Sign Up 101"; ?>
     <?php include "includes/metadata.php" ?>
+    <link rel="stylesheet" href="styles/home.css" />
   </head>
   <body>
    <?php include 'includes/header.php';?>
