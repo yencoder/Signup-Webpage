@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url("reset.css"); /*import reset*/
+
+ :root {
+  font-family: 'Lora', serif;
+  color: #0A0A0B;
+  background-color: #FEFFFE ;
+  background-image: linear-gradient(to bottom right, transparent, #0B3954);
+  font-family: 'Lato', sans-serif; 
+ } 
+
+h2 {
+  text-align: center;
+  font-size: 2.8rem;
+}
+
+body{
+  font-size: 1.2rem;
+}
+
+form input[type=text], form input[type=password] {
+  width: 100%;
+  padding: 1.2em 2em;
+  margin: 0.8em 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 2em;
+  background-color: #BFD7EA;
+}
+
+form button {
+  font-size: 1.2rem;
+  background-color: #0B3954;
+  color: #FEFFFE;
+  padding: 0.7em 2em;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+  width:100%;
+}
+
+form a:hover,
+form button:hover {
+  opacity: 0.8;
+}
+
+form a {
+  font-size: 1rem;
+  padding: 0.5em; 
+  text-decoration: none;
+  background-color: #0B3954;
+  color: #FEFFFE;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+}
+
+.container {
+  padding: 1.6em;
+}
+
+.container div {
+  padding-bottom: 1em;
+}
+
+form span.psw {
+  float: right;
+}
+
+form {
+  margin: 5em auto 5em auto; 
+  max-width: 36em;
+  background-color:#FEFFFE ;
+  border-radius: 1em;
+  box-shadow: 0.7em 0.7em 0.7em #082638;
+}
+
+header, footer {
+  font-family: 'Arimo', sans-serif;
+  font-size: 3rem;
+  color: #0A0A0B;
+  background-image: linear-gradient(to right, #BFD7EA, #FEFFFE);
+  filter: drop-shadow(0.3rem 0.3rem 0.2rem #0A0A0B);
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5em;
+}
+/* header */
+header {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+header ul {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+header li {
+  background-color: #0B3954;
+  border: 0.05em solid #848B8E;
+  border-radius: 1em;
+  padding: 0.1em 0.5em;
+  margin: 0em 0.2em;
+}
+header a {
+  text-decoration: none;
+  color: #FEFFFE;
+}
+header a:hover { color: greenyellow; }
+header a:active { color: hotpink; }
+/* footer */
+footer {
+  font-size: 1rem;
+  justify-content: center;
+}
