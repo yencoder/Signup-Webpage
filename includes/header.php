@@ -4,7 +4,7 @@
     <ul>
       <li><a href="home.php">Home</a></li>
       <li><a href="signup.html">Sign Up</a></li>
-      <li><a href="login.html">Login</a></li>
+      <li><a href="login.php">Login</a></li>
     </ul>
   </nav>
 </header>
