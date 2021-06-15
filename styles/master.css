@@ -2,6 +2,8 @@
 /* import google font */
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 :root {
   /* set variables */
   --offblack: #0A0A0B;
@@ -11,7 +13,7 @@
   --offwhite: #FEFFFE;
 
   font-family: "Lato", sans-serif;
-  color: var(--offwhite);
+  color: var(--offwhite); /* set to black as default and convert each button to white manually */
   background-image: linear-gradient(to top left, var(--dullblue), var(--offwhite) 110%);
   background-repeat: no-repeat;
   width: 100%;
@@ -60,4 +62,53 @@ header a:active { color: hotpink; }
 footer {
   font-size: 1rem;
   justify-content: center;
+  padding: 0.2em;
+}
+/* main */
+section {
+  font-size: 1.2rem;
+  font-family: 'Comfortaa', cursive;
+  color: var(--offblack);
+  background-color: var(--offwhite);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 0.6em;
+  padding: 1em;
+  margin: 1em 0em;
+}
+section:first-child {
+  align-items: center;
+  padding: 1em 2em;
+}
+section:first-child h2 {
+  font-size: 2.5em;
+}
+section:nth-child(2) h2 {
+  font-size: 1.8em;
+}
+section:nth-child(2) p {
+  padding: 1em;
+}
+#signup {
+  font-size: 1.2em;
+  text-decoration: none;
+  color: var(--offwhite);
+  background-color: var(--dullblue);
+  border: 0.05em solid var(--softgray);
+  transition: border-color;
+  border-radius: 1rem;
+  padding: 1em 2.5em;
+  margin: 1em 0em;
+}
+#signup:hover { color: greenyellow;  box-shadow: 0em 0em 0.2em;}
+#signup:active { color: hotpink; }
+section:last-child h2 {
+  font-size: 2em;
+  align-self: center;
+  margin-bottom: 0.5em;
+}
+section:last-child p {
+  font-family: 'Indie Flower', cursive;
+  margin-bottom: 0.5em;
 }

@@ -21,7 +21,7 @@
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="50" rows="5"></textarea>
               </div>
-              <div class="input">
+              <div class="input"> <!-- add multiple time slots for x users -->
                 <label for="date">Time Slot</label>
                 <input id="date" name="date" type="datetime-local" />
               </div>

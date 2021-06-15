@@ -4,7 +4,6 @@
     <script src="https://kit.fontawesome.com/c51f44d97a.js" crossorigin="anonymous"></script>
     <?php $page_title = "Sign Up 101"; ?>
     <?php include "includes/metadata.php" ?>
-    <link rel="stylesheet" href="styles/home.css" />
   </head>
   <body>
    <?php include 'includes/header.php';?>
