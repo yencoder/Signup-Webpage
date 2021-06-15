@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/6786f5cbb4.js" crossorigin="anonymous"></script>
-    <?php $page_title = "Sign Up Sheet"; ?>
-    <?php include "includes/metadata.php" ?>
+    <title>Sign Up Sheet</title>
     <link rel="stylesheet" href="styles/signup.css" />
   </head>
   <body>
     <?php include 'includes/header.php';?>
-      <main>
           <form>
-      <header>
           <h2>
               Create Your Sign Up Sheet
           </h2>
-      </header>
             <div class="input">
                 <label for="title">Sheet Title</label>
                 <input id="title" name="title" type="text" placeholder="COIS 3420 Project" />
@@ -40,6 +38,6 @@
               </fieldset>
               <button id="save">Save</button>
           </form>
-      </main>
     <?php include "includes/footer.php" ?>
   </body>
+</html>
