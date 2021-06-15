@@ -51,9 +51,9 @@ button:hover{
 header, footer {
     font-family: 'Arimo', sans-serif;
     font-size: 3rem;
-    color: var(--offblack);
-    background-image: linear-gradient(to right, var(--bluetint), var(--offwhite));
-    filter: drop-shadow(0.3rem 0.3rem 0.2rem var(--offblack));
+    color: #0A0A0B;
+    background-image: linear-gradient(to right, #BFD7EA, #FEFFFE);
+    filter: drop-shadow(0.3rem 0.3rem 0.2rem #0A0A0B);
     display: flex;
     flex-wrap: wrap;
     border-radius: 0.5em;
@@ -71,15 +71,15 @@ header, footer {
     flex-wrap: wrap;
   }
   header li {
-    background-color: var(--dullblue);
-    border: 0.05em solid var(--softgray);
+    background-color: #0B3954;
+    border: 0.05em solid #848B8E;
     border-radius: 1em;
     padding: 0.1em 0.5em;
     margin: 0em 0.2em;
   }
   header a {
     text-decoration: none;
-    color: var(--offwhite);
+    color: #FEFFFE;
   }
   header a:hover { color: greenyellow; }
   header a:active { color: hotpink; }
