@@ -8,17 +8,17 @@
   <body>
    <?php include 'includes/header.php';?>
     <!-- Sign up content -->
-    <section>
+    <section class="home">
       <h2>Group Organizing Made Easy</h2>
       <a href="signup.html"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
     </section>
     <!-- What we Offer -->
-    <section>
+    <section class="home">
       <h2>What we Offer</h2>
       <p>A fast and easy way to organize, blah blah blah</p>
     </section>
     <!-- About us -->
-    <section>
+    <section class="home">
       <h2>Meet the Creators</h2>
       <p>
         Hi&#33; I&#39;m Fanshu. I&#39;m a Computer Science and Business student. 

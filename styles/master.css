@@ -65,7 +65,7 @@ footer {
   padding: 0.2em;
 }
 /* -------------------------------- home.php -------------------------------- */
-section {
+.home {
   font-size: 1.2rem;
   font-family: 'Comfortaa', cursive;
   color: var(--offblack);
@@ -77,19 +77,13 @@ section {
   padding: 1em;
   margin: 1em 0em;
 }
-section:first-child {
+.home:first-child {
   align-items: center;
   padding: 1em 2em;
 }
-section:first-child h2 {
-  font-size: 2.5em;
-}
-section:nth-child(2) h2 {
-  font-size: 1.8em;
-}
-section:nth-child(2) p {
-  padding: 1em;
-}
+.home:first-child h2 { font-size: 2.5em; }
+.home:nth-child(2) h2 { font-size: 1.8em; }
+.home:nth-child(2) p { padding: 1em; }
 #signup {
   font-size: 1.2em;
   text-decoration: none;
@@ -103,12 +97,23 @@ section:nth-child(2) p {
 }
 #signup:hover { color: greenyellow;  box-shadow: 0em 0em 0.2em;}
 #signup:active { color: hotpink; }
-section:last-child h2 {
+.home:last-child h2 {
   font-size: 2em;
   align-self: center;
   margin-bottom: 0.5em;
 }
-section:last-child p {
+.home:last-child p {
   font-family: 'Indie Flower', cursive;
   margin-bottom: 0.5em;
 }
+/* -------------------------------- signup.php -------------------------------- */
+
+
+
+
+
+/* -------------------------------- login.php -------------------------------- */
+
+
+
+
