@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
 :root {
   /* set variables */
   --offblack: #0A0A0B;
@@ -13,11 +14,9 @@
   --offwhite: #FEFFFE;
 
   font-family: "Lato", sans-serif;
-  color: var(--offwhite); /* set to black as default and convert each button to white manually */
+  color: var(--offblack); /* set to black as default and convert each button to white manually */
   background-image: linear-gradient(to top left, var(--dullblue), var(--offwhite) 110%);
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
 }
 body {
   padding: 1rem;
@@ -108,12 +107,150 @@ footer {
 }
 /* -------------------------------- signup.php -------------------------------- */
 
+.signup form{
+  background-color: white;
+  border: solid grey;
+  border-radius: 1em;
+  box-shadow: 0.2em 0.3em #0b3954;
 
-
-
+  text-align: center;
+  width: fit-content;
+  display: inline-block;
+  margin-top: 6em;
+  margin-left: 30em;
+  margin-bottom: 11em;
+}
+.signup form h2{
+  font-size: 1.7em;
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  font-weight: bold;
+}
+.signup .input{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+  margin: 1em 1em;
+}
+.signup .input label{
+  margin-bottom: 0.2em;
+}
+.signup input{
+  border-style: none;
+  border-radius: 2em;
+  background-color: #bfd7ea;
+  line-height: 2.5em;
+  padding-left: 0.8em;
+  padding-right: 0.5em;
+  outline: none;
+}
+.signup textarea{
+  background-color: #bfd7ea;
+}
+.signup fieldset{
+  display: flex;
+  justify-content: space-around;
+}
+.signup legend{
+  font-size: 1.5em;
+}
+.signup fieldset div{
+  margin-top: 0.5em;
+  font-size: 1em;
+}
+.signup button{
+  background-color: #0b3954;
+  border-radius: 2em;
+  color: white;
+  margin-bottom: 0.6em;
+  margin-top: 0.5em;
+  font-size: 1em;
+  padding:0.3em 0.9em;
+}
+.signup button:hover{
+  background-color: #061d2b;
+}
 
 /* -------------------------------- login.php -------------------------------- */
 
+.logincreate h2 {
+  text-align: center;
+  font-size: 2.8rem;
+}
 
+.logincreate body{
+  font-size: 1.2rem;
+}
 
+.logincreate form input[type=text], form input[type=password] {
+  width: 100%;
+  padding: 1.2em 2em;
+  margin: 0.8em 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 2em;
+  background-color: #BFD7EA;
+}
 
+.logincreate form button {
+  font-size: 1.2rem;
+  background-color: #0B3954;
+  color: #FEFFFE;
+  padding: 0.7em 2em;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+  width:100%;
+}
+
+.logincreate form a:hover,
+.logincreate form button:hover {
+  opacity: 0.8;
+}
+
+.logincreate form a {
+  font-size: 1rem;
+  padding: 0.5em; 
+  text-decoration: none;
+  background-color: #0B3954;
+  color: #FEFFFE;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+}
+
+.logincreate .container {
+  padding: 1.6em;
+}
+
+.logincreate .container div {
+  padding-bottom: 1em;
+}
+
+.logincreate form span.psw {
+  float: right;
+}
+
+.logincreate form {
+  margin: 5em auto 5em auto; 
+  max-width: 36em;
+  background-color:#FEFFFE ;
+  border-radius: 1em;
+  box-shadow: 0.7em 0.7em 0.7em #082638;
+}
+
+/*------------------------------------------------------------------------------
+|                               Error Styles
+|-----------------------------------------------------------------------------*/
+
+.error {
+  color: red;
+  display: block;
+  margin: 0.5em;
+}
+
+.hidden {
+  display: none;
+}
