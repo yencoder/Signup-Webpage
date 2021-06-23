@@ -3,7 +3,7 @@
   <head>
     <?php $page_title = "Create Account"; ?>
     <?php include "includes/metadata.php" ?>
-    <!-- <link rel="stylesheet" href="styles/logincss.css" /> --> <!-- move form styling to master.css -->
+    <!-- <link rel="stylesheet" href="styles/master.css" /> --> <!-- move form styling to master.css -->
   </head>
   <body>
   <?php include 'includes/header.php';?>
