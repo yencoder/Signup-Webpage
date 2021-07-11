@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $pdo = connectDB();
 
     // CHECK THE DATABASE FOR THE USER
-    $query = "SELECT id,username, password FROM `cois3420_users` WHERE username = ?";
+    $query = "SELECT id,username, password FROM `signup_users` WHERE username = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$username]);
     $results = $stmt->fetch();
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
       if(empty(trim($email))) {
         $errors = ['emptyEmail'];
       }
-      $query = "SELECT id,email, password FROM `cois3420_users` WHERE email = ?";
+      $query = "SELECT id,email, password FROM `signup_users` WHERE email = ?";
       $stmt = $pdo->prepare($query);
       $stmt->execute([$email]);
       $results = $stmt->fetch();
