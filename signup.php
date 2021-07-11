@@ -7,8 +7,6 @@ $errors = array(); //declare empty array to add errors too
 //get name from post or set to NULL if doesn't exist
 $title = $_POST['title'] ?? null;
 $description = $_POST['description'] ?? null;
-$name = $_POST['membername'] ?? null;
-$email = $_POST['memberemail'] ?? null;
 $date = $_POST['date'] ?? null;
 $privacy = $_POST['status'] ?? null;
 
@@ -30,9 +28,9 @@ if (isset($_POST['save'])) {
 }
       //saved page
    if(count($errors)=== 0){           
-    $query = "INSERT into signin_info values (NULL,?,?,?,?,?,?)";
+    $query = "INSERT into signin_info values (NULL,?,?,?,?)";
     //prepare & execute query
-    $stmt = $pdo->prepare($query)->execute([$title,$description,$name,$email,$date,$privacy]);
+    $stmt = $pdo->prepare($query)->execute([$title,$description,$date,$privacy]);
       header("Location: viewpage.php");  //<script type="text/javascript"> alert('Information is Saved!'); </script>
          exit;
     }
@@ -64,12 +62,6 @@ if (isset($_POST['save'])) {
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="50" rows="5" value="<?=$description?>"></textarea>
                 <span class="error <?=!isset($errors['description']) ? 'hidden' : "";?>">Please Write a Description</span>
-              </div>
-              <div class="input">
-                <label for="membername, memberemail">Members</label>
-                <input id="name" name="membername" type="text" placeholder="Member's Name" >
-                <input id="email" name="memberemail" type="text" placeholder="Member's Email Address" >
-                <button id="add" name="add">+ ADD</button>
               </div>
               <div class="input">
                 <label for="date">Time Slot</label>
