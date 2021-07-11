@@ -10,7 +10,7 @@
     <!-- Sign up content -->
     <section class="home">
       <h2>Group Organizing Made Easy</h2>
-      <a href="signup.html"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
+      <a href="signup.php"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
     </section>
     <!-- What we Offer -->
     <section class="home">
