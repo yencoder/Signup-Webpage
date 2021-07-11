@@ -106,7 +106,10 @@ footer {
   margin-bottom: 0.5em;
 }
 /* -------------------------------- signup.php -------------------------------- */
-
+.signup{
+  display: flex;
+  justify-content: center;
+}
 .signup form{
   background-color: white;
   border: solid grey;
@@ -115,10 +118,10 @@ footer {
 
   text-align: center;
   width: fit-content;
-  display: inline-block;
-  margin-top: 6em;
-  margin-left: 30em;
-  margin-bottom: 11em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3em;
+  margin-bottom: 5em;
 }
 .signup form h2{
   font-size: 1.7em;
@@ -143,6 +146,7 @@ footer {
   line-height: 2.5em;
   padding-left: 0.8em;
   padding-right: 0.5em;
+  margin-bottom: 0.2em;
   outline: none;
 }
 .signup textarea{
@@ -163,15 +167,23 @@ footer {
   background-color: #0b3954;
   border-radius: 2em;
   color: white;
-  margin-bottom: 0.6em;
-  margin-top: 0.5em;
+  margin:0.5em 0.5em;
   font-size: 1em;
   padding:0.3em 0.9em;
+}
+.signup .input button{
+  font-size: 0.6em;
+  margin-top: 0.1em;
+  width: 20%;
+  margin-left: 40%;
 }
 .signup button:hover{
   background-color: #061d2b;
 }
 
+.signup span{
+  font-size: small;
+}
 /* -------------------------------- login.php -------------------------------- */
 
 .logincreate h2 {
