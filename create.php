@@ -94,9 +94,9 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="styles/master.css" />
   </head>
   <body class="logincreate">
-  <?php include 'includes/header.php';?>
-  <section>
-      <form method="post"> 
+    <?php include 'includes/header.php';?>
+    <section>
+      <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
         <h2>Create New Account</h2>
         <div class="container">
           <div>
@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
           </div>           
         </div>    
       </form>
-  </section>
-      <?php include "includes/footer.php" ?>
+    </section>
+    <?php include "includes/footer.php" ?>
   </body>
 </html>
