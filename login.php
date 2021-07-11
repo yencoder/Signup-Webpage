@@ -3,22 +3,25 @@ $errors = array();
 
 $user = $_POST['uname'] ?? null;
 $pass = $_POST['psw'] ?? null;
-$email = $_POST['email'] ?? null;
+
+if(isset($_COOKIE['mysitecookie'])){
+  $user=$_COOKIE['mysitecookie'];
+ }
 
 if (isset($_POST['submit'])) { //only do this code if the form has been submitted
   include 'includes/library.php';
   $pdo = connectDB();
  
   //query for the username
-  $query = "select id, username, password from signup_users where username=?";  
+  $query = "select userid, username, password from signup_users where username=?";  
   $stmt=$pdo->prepare($query);
   $results = $stmt->execute([$user]);
 
   if($row = $stmt->fetch()) {      
-    if(password_verify($pass, $row['userpass'])) {
+    if(password_verify($pass, $row['password'])) {
       session_start();
       $_SESSION['username'] = $user;
-      $_SESSION['userid'] = $row['id'];
+      $_SESSION['userid'] = $row['userid'];
 
       header("Location:home.php");
       exit();
@@ -29,6 +32,9 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
   }  else {
     $errors['login'] = true;
   }
+  //set cookie if box checked
+  if (isset($_POST['remember']))
+  setcookie("mysitecookie",$username,time()+60*60*24*30*12);
 }
 
 ?>
@@ -52,9 +58,6 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
         <input id ="uname" type="text" placeholder="Enter Username" name="uname" required value="<?=$user;?>">
           </div>
           <div>
-        <label for="email">Email</label>
-        <input id ="email" type="text" placeholder="Enter Email" name="email" required value="<?=$email;?>">
-           </div>
            <div>
         <label for="psw">Password</label>
         <input id = "psw" type="password" placeholder="Enter Password" name="psw" required value="<?=$pass;?>"> 
