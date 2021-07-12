@@ -12,7 +12,7 @@
   --bluetint: #BFD7EA;
   --softgray: #848B8E;
   --offwhite: #FEFFFE;
-
+  min-height: 100vh;
   font-family: "Lato", sans-serif;
   color: var(--offblack); /* set to black as default and convert each button to white manually */
   background-image: linear-gradient(to top left, var(--dullblue), var(--offwhite) 110%);

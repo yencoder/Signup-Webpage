@@ -6,10 +6,10 @@ $errors = array();
 
 // GET AND SANTIZE EACH INPUT
 $username = filter_var($_POST['username'] ?? null, FILTER_SANITIZE_STRING);
+// encrypt password with a hash on the database as well 
 $password = filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING);
 $confirmPassword = filter_var($_POST['confirmPassword'] ?? null, FILTER_SANITIZE_STRING);
 $email = filter_var($_POST['email'] ?? null, FILTER_SANITIZE_EMAIL);
-$unique = false;
 
 // ENSURE THAT THERE IS INFORMATION IN $_POST
 if (isset($_POST['submit'])) {
@@ -17,13 +17,12 @@ if (isset($_POST['submit'])) {
     $pdo = connectDB();
 
     // CHECK THE DATABASE FOR THE USER
-    $query = "SELECT * FROM `signup_users` WHERE username=?, email=?, password=?";
+    $query = "SELECT * FROM `signup_users` WHERE username=?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$username, $email, $password]);
+    $stmt->execute([$username]);
     $results = $stmt->fetch();
 
     // CHECK CREDITIONALS
-    if (isset($_POST['submit'])) {
       // CHECK USERNAME FIELD
       if(empty(trim($username))) {
         $errors['emptyUsername'] = true;
@@ -32,10 +31,7 @@ if (isset($_POST['submit'])) {
         $errors['usernameChars'] = true;
       }
       // IF USER ALREADY EXISTS IN THE DATABASE
-      if ($results['username'] === false) {
-        $unique = true;
-      }
-      else {
+      if ($results) {
         $errors['usernameExists'] = true;
       }
       
@@ -43,11 +39,15 @@ if (isset($_POST['submit'])) {
       if(empty(trim($email))) {
         $errors['emptyEmail'] = true;
       }
+      if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['incorrectEmail'] = true; // change errror name
+      }
       // IF EMAIL EXISTS ALREADY EXISTS IN THE DATABASE
-      if ($results['email'] === false) {
-        $unique = true;
-      } 
-      else {
+      $query = "SELECT * FROM `signup_users` WHERE email=?";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$email]);
+      $results = $stmt->fetch();
+      if ($results) {
         $errors['emailExists'] = true;
       }
 
@@ -58,6 +58,7 @@ if (isset($_POST['submit'])) {
       elseif (strlen(trim($password)) < 8) {
         $errors['passwordLength'] = true;
       }
+// use regular expression to filter password to ensure at least 1 caps and 1 numeric
 
       // CHECK CONFIRM PASSWORD FIELD
       if ($password != $confirmPassword) {
@@ -65,25 +66,17 @@ if (isset($_POST['submit'])) {
       }
       
       // PASSWORD VERIFY
-      if(!sizeof($errors) && $unique == true) {
+      if(!sizeof($errors)) {
 
         // INSERT INFO INTO THE DATABASE
-        $query = "INSERT INTO signup_users(userid, username, email, password) VALUES (default,?,?,?)";
-        $stmt = $pdo->prepare($query)->execute(['userid', $username, $email, $password]);
-
-        // START SESSION
-        session_start();
-        $_SESSION['username'] = $results['username'];
-        $_SESSION['userid'] = $results['userid'];
-
+// hash password before writing it to the database
+        $query = "INSERT INTO signup_users(userid, username, email, `password`) VALUES (NULL,?,?, ?)";
+        $stmt = $pdo->prepare($query)->execute([$username, $email, $password]);
+        
         // REDIRECT
-        header("Location: home.php");
+        header("Location: login.php");
         exit();
       }
-    }
-    else {
-      $errors = ['login'];
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -96,36 +89,36 @@ if (isset($_POST['submit'])) {
   <body class="logincreate">
     <?php include 'includes/header.php';?>
     <section>
-      <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+      <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST">
         <h2>Create New Account</h2>
         <div class="container">
           <div>
-            <label for="uname"><b>Username</b></label>
-            <input id = "uname" type="text" placeholder="Username" name="uname">
+            <label for="username"><b>Username</b></label>
+            <input id = "username" type="text" placeholder="Username" name="username" autocomplete="new-password" value="<?=$username?>">
             <span class="error <?=!isset($errors['emptyUsername']) ? 'hidden' : "";?>">Please enter a username</span>
             <span class="error <?=!isset($errors['usernameChars']) ? 'hidden' : "";?>">Username must be unique and can only contain letters, numbers, and underscores</span>
             <span class="error <?=!isset($errors['usernameExists']) ? 'hidden' : "";?>">Username taken</span>
           </div>
           <div>
             <label for="email"><b>Your email</b></label>
-            <input id = "email" type="text" placeholder="Email" name="email">
+            <input id = "email" type="text" placeholder="Email" name="email" value="<?=$email?>">
             <span class="error <?=!isset($errors['emptyEmail']) ? 'hidden' : "";?>">Please enter an email</span>
+            <span class="error <?=!isset($errors['incorrectEmail']) ? 'hidden' : "";?>">Please use a valid email address</span>
             <span class="error <?=!isset($errors['emailExists']) ? 'hidden' : "";?>">Email taken</span>
           </div>
           <div>
-            <label for="psw"><b>Enter a password</b></label>
-            <input id="psw" type="password" placeholder="Password" name="psw">
+            <label for="password"><b>Enter a password</b></label>
+            <input id="password" type="password" placeholder="Password" name="password" autocomplete="new-password">
             <span class="error <?=!isset($errors['emptyPassword']) ? 'hidden' : "";?>">Please enter a password</span>
             <span class="error <?=!isset($errors['passwordLength']) ? 'hidden' : "";?>">Password must be longer than 8 characters</span>
           </div>
           <div>
-            <label for="repeat"><b>Repeat to confirm password</b></label>
-            <input id="repeat" type="password" placeholder="Repeat Password" name="repeat">
+            <label for="confirmPassword"><b>Repeat to confirm password</b></label>
+            <input id="confirmPassword" type="password" placeholder="Repeat Password" name="confirmPassword">
             <span class="error <?=!isset($errors['confirmPassword']) ? 'hidden' : "";?>">Password do not match</span>
           </div>
           <div>
-            <button type="submit">Create account</button>
-            <span class="error <?=!isset($errors['login']) ? 'hidden' : "";?>">Something went wrong, please try again</span>
+            <button type="submit" name="submit">Create account</button>
           </div>           
         </div>    
       </form>
