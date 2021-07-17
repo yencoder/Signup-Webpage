@@ -48,12 +48,12 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
     <link rel="stylesheet" href="styles/master.css" />
   </head>
   <body class="logincreate">
-  <?php include 'includes/header.php';?>
-  <section>
-   <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
-      <h2>Log in</h2>
-      <div class="container">
-          <div>
+    <?php include 'includes/header.php';?>
+    <section>
+    <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+        <h2>Log in</h2>
+        <div class="container">
+        <div>
         <label for="uname">Username</label>
         <input id ="uname" type="text" placeholder="Enter Username" name="uname" required value="<?=$user;?>">
           </div>
@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
            <div>
         <label for="psw">Password</label>
         <input id = "psw" type="password" placeholder="Enter Password" name="psw" required value="<?=$pass;?>"> 
-           </div>         
+           </div>
            <div>
              <span class="error <?=!isset($errors['login']) ? 'hidden' : "";?>">Invalid username and/or password</span>
             </div>

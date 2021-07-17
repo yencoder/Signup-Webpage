@@ -8,6 +8,7 @@
   <body>
    <?php include 'includes/header.php';?>
     <!-- Sign up content -->
+    <div class="content">
     <section class="home">
       <h2>Group Organizing Made Easy</h2>
       <a href="signup.php"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
@@ -33,6 +34,7 @@
         You can often find me tossing a frisbee around my neighbourhood and sometimes even on long bike rides.
       </p>
     </section>
+    </div>
     <?php include "includes/footer.php" ?>
   </body>
 </html>
