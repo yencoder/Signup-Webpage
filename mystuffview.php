@@ -7,7 +7,7 @@ header("Location:login.php");
 exit();
 }
 $userid = $_SESSION['userid'];
-include 'includes/library.php';
+include 'includes/library.php'; 
 $pdo = connectdb();
 
 $query = "SELECT * FROM signin_info where creatorid = ?";
@@ -15,10 +15,10 @@ $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$userid]);
 $sheets = $stmt->fetchAll();
 
-$query = "SELECT * FROM slot_info where userid = ?"; 
-$stmt=$pdo->prepare($query);                        
+$query = "SELECT * FROM slot_info where userid = ?";
+$stmt=$pdo->prepare($query);
 $results = $stmt->execute([$userid]);                
-$slots = $stmt->fetchAll();                          
+$slots = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
