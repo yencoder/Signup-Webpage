@@ -29,6 +29,7 @@ if (!$stmt) {
   die("Something went horribly wrong");
 }
 $table = $stmt->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@ $table = $stmt->fetchAll();
   </head>
   <body>
     <?php include 'includes/header.php'?>
-    
+    <section class = "vsheet">
     <!-- Title of the sheet should be selected from table in the database and displayed first -->
     <h1><?php echo $t1row['title'] ?></h1>
     
@@ -61,7 +62,13 @@ $table = $stmt->fetchAll();
     <tr>
       <td><?php echo "$r[title]"; ?></td>
       <td><?php echo "$r[timeslot]"; ?></td>
-      <td><?php echo "$r[user]"; ?></td>
+      <td>
+      <?php echo "$r[user]"; // FIX THIS
+      $name="$r[user]";
+      if($name==null): ?>
+      <a href="">Register</a>      
+      <?php endif ?>
+      </td>
     </tr>
      <?php endforeach ?>  
    </tbody>
@@ -69,7 +76,7 @@ $table = $stmt->fetchAll();
 
     <!-- Each time a person signs up. the tables are updated. numofpeoplesignedup in the first table.
     and add the name and email to the second table. -->
-
+   </section>
     <?php include "includes/footer.php" ?>
   </body>
 </html>
