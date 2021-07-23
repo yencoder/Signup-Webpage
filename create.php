@@ -5,78 +5,83 @@ require_once('includes/library.php');
 $errors = array();
 
 // GET AND SANTIZE EACH INPUT
-$username = filter_var($_POST['username'] ?? null, FILTER_SANITIZE_STRING);
-// encrypt password with a hash on the database as well 
-$password = filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING);
-$confirmPassword = filter_var($_POST['confirmPassword'] ?? null, FILTER_SANITIZE_STRING);
-$email = filter_var($_POST['email'] ?? null, FILTER_SANITIZE_EMAIL);
+$username = trim(filter_var($_POST['username'] ?? null, FILTER_SANITIZE_STRING));
+$password = trim(filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING));
+$confirmPassword = trim(filter_var($_POST['confirmPassword'] ?? null, FILTER_SANITIZE_STRING));
+$email = trim(filter_var($_POST['email'] ?? null, FILTER_SANITIZE_EMAIL));
 
 // ENSURE THAT THERE IS INFORMATION IN $_POST
 if (isset($_POST['submit'])) {
-    // CONNECT TO THE DATABASE
-    $pdo = connectDB();
+  // CONNECT TO THE DATABASE
+  $pdo = connectDB();
 
-    // CHECK THE DATABASE FOR THE USER
-    $query = "SELECT * FROM `signup_users` WHERE username=?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$username]);
-    $results = $stmt->fetch();
+  // CHECK CREDITIONALS
+  // CHECK USERNAME FIELD
+  if(empty($username)) {
+    $errors['emptyUsername'] = true;
+  }
+  elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+    $errors['usernameChars'] = true;
+  }
+  // IF USER ALREADY EXISTS IN THE DATABASE
+  $query = "SELECT * FROM `signup_users` WHERE username=?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$username]);
+  $results = $stmt->fetch();
+  if ($results) {
+    $errors['usernameExists'] = true;
+  }
+  
+  // CHECK EMAIL FIELD
+  if(empty($email)) {
+    $errors['emptyEmail'] = true;
+  }
+  elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors['incorrectEmail'] = true; // change errror name
+  }
+  // IF EMAIL ALREADY EXISTS IN THE DATABASE
+  $query = "SELECT * FROM `signup_users` WHERE email=?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$email]);
+  $results = $stmt->fetch();
+  if ($results) {
+    $errors['emailExists'] = true;
+  }
+  
+  // CHECK PASSWORD FIELD
+  $upperCase = preg_match('@[A-Z]@', $password);
+  $lowerCase = preg_match('@[a-z]@', $password);
+  $numberCase = preg_match('@[0-9]@', $password);
+  $specialCase = preg_match('@[^\w]@', $password);
+  if(empty($password)) {
+    $errors['emptyPassword'] = true;
+  }
+  elseif (!$upperCase || !$lowerCase || !$numberCase || !$specialCase || strlen($password) < 8) {
+    if (!$upperCase) { $errors['passwordCharsUpper'] = true; }
+    if (!$lowerCase) { $errors['passwordCharsLower'] = true; }
+    if (!$numberCase) { $errors['passwordCharsNumber'] = true; }
+    if (!$specialCase) { $errors['passwordCharsSpecial'] = true; }
+    if (!strlen($password) < 8) { $errors['passwordLength'] = true; }
+  }
+  // CHECK CONFIRM PASSWORD FIELD
+  if ($password != $confirmPassword) {
+    $errors['confirmPassword'] = true;
+  }
 
-    // CHECK CREDITIONALS
-      // CHECK USERNAME FIELD
-      if(empty(trim($username))) {
-        $errors['emptyUsername'] = true;
-      }
-      elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($username))) {
-        $errors['usernameChars'] = true;
-      }
-      // IF USER ALREADY EXISTS IN THE DATABASE
-      if ($results) {
-        $errors['usernameExists'] = true;
-      }
-      
-      // CHECK EMAIL FIELD
-      if(empty(trim($email))) {
-        $errors['emptyEmail'] = true;
-      }
-      if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['incorrectEmail'] = true; // change errror name
-      }
-      // IF EMAIL EXISTS ALREADY EXISTS IN THE DATABASE
-      $query = "SELECT * FROM `signup_users` WHERE email=?";
-      $stmt = $pdo->prepare($query);
-      $stmt->execute([$email]);
-      $results = $stmt->fetch();
-      if ($results) {
-        $errors['emailExists'] = true;
-      }
-
-      // CHECK PASSWORD FIELD
-      if(empty(trim($password))) {
-        $errors['emptyPassword'] = true;
-      }
-      elseif (strlen(trim($password)) < 8) {
-        $errors['passwordLength'] = true;
-      }
-// use regular expression to filter password to ensure at least 1 caps and 1 numeric
-
-      // CHECK CONFIRM PASSWORD FIELD
-      if ($password != $confirmPassword) {
-        $errors['confirmPassword'] = true;
-      }
-      
-      // PASSWORD VERIFY
-      if(!sizeof($errors)) {
-
-        // INSERT INFO INTO THE DATABASE
-// hash password before writing it to the database
-        $query = "INSERT INTO signup_users(userid, username, email, `password`) VALUES (NULL,?,?, ?)";
-        $stmt = $pdo->prepare($query)->execute([$username, $email, $password]);
-        
-        // REDIRECT
-        header("Location: login.php");
-        exit();
-      }
+  // ERROR VERIFICATION
+  if(!sizeof($errors)) {
+    // INSERT CREDITIONALS INTO THE DATABASE
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $query = "INSERT INTO signup_users(userid, username, email, `password`) VALUES (NULL,?,?,?)";
+    $stmt = $pdo->prepare($query)->execute([$username, $email, $password]);
+    // START SESSION
+    session_start();
+    $_SESSION['username'] = $username;
+    $_SESSION['userid'] = $results['userid'];
+    // REDIRECT
+    header("Location: login.php");
+    exit();
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -110,6 +115,10 @@ if (isset($_POST['submit'])) {
             <label for="password"><b>Enter a password</b></label>
             <input id="password" type="password" placeholder="Password" name="password" autocomplete="new-password">
             <span class="error <?=!isset($errors['emptyPassword']) ? 'hidden' : "";?>">Please enter a password</span>
+            <span class="error <?=!isset($errors['passwordCharsUpper']) ? 'hidden' : "";?>">Password must contain at least 1 upper case letter</span>
+            <span class="error <?=!isset($errors['passwordCharsLower']) ? 'hidden' : "";?>">Password must contain at least 1 lower case letter</span>
+            <span class="error <?=!isset($errors['passwordCharsNumber']) ? 'hidden' : "";?>">Password must contain at least 1 number</span>
+            <span class="error <?=!isset($errors['passwordCharsSpecial']) ? 'hidden' : "";?>">Password must contain at least 1 special character</span>
             <span class="error <?=!isset($errors['passwordLength']) ? 'hidden' : "";?>">Password must be longer than 8 characters</span>
           </div>
           <div>
