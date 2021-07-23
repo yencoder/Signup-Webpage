@@ -74,10 +74,6 @@ if (isset($_POST['submit'])) {
     $password = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO signup_users(userid, username, email, `password`) VALUES (NULL,?,?,?)";
     $stmt = $pdo->prepare($query)->execute([$username, $email, $password]);
-    // START SESSION
-    session_start();
-    $_SESSION['username'] = $username;
-    $_SESSION['userid'] = $results['userid'];
     // REDIRECT
     header("Location: login.php");
     exit();
