@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
         <input type="checkbox" name="remember">
         </div>
         <div>
-        <span class="psw"><a href="#">Forgot password</a></span>
+        <span class="psw"><a href="forgot.php">Forgot password</a></span>
         <span><a href="create.php">New account</a></span>
         </div>
       </div>    
