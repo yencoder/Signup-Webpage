@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
           <div>
             <button type="submit" name="submit">Reset Password</button>
           </div>           
-        </div>    
+        </div>
       </form>
     </section>
     <?php include "includes/footer.php" ?>
