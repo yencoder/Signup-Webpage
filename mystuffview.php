@@ -7,7 +7,7 @@ header("Location:login.php");
 exit();
 }
 $userid = $_SESSION['userid'];
-include 'includes/library.php'; 
+include 'includes/library.php';
 $pdo = connectdb();
 
 $query = "SELECT * FROM signin_info where creatorid = ?";
@@ -15,10 +15,11 @@ $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$userid]);
 $sheets = $stmt->fetchAll();
 
-$query = "SELECT * FROM slot_info where userid = ?";
-$stmt=$pdo->prepare($query);
+$query = "SELECT * FROM slot_info where userid = ?"; 
+$stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$userid]);                
-$slots = $stmt->fetchAll();
+$slots = $stmt->fetchAll(); 
+
 ?>
 
 <!DOCTYPE html>
@@ -35,11 +36,12 @@ $slots = $stmt->fetchAll();
    Add icon based links for View, edit, delete and copy. -->
    <section>
    <h2>My Sign-Up Sheets</h2>
-   <?php  foreach($sheets as $r): ?>   
+   <?php  foreach($sheets as $r): ?>     <!--add to account for people with no sheets or slots -->
   <section>
     <div>
     <div class="sbox">
-      <div>
+    <div>
+        <?php  ?>
      <p>Title: <?php echo "$r[title]"; ?></p>
      <p>Total slots: <?php echo "$r[numofslots]"; ?></p>
      <p>Number of people signed up: <?php echo "$r[numofpeoplesignedup]"; ?></p>
@@ -53,7 +55,6 @@ $slots = $stmt->fetchAll();
    </div> 
    </section>    
    <?php endforeach ?>  
-
    <!-- Display only if not expired. For each slot user signed up for, display the Title, date and the time.
    Add icon based links for View details and cancel slot. -->
    <h2>My Signed-Up Slots</h2>
