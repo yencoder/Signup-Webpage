@@ -294,7 +294,81 @@ footer {
   color: greenyellow;
   box-shadow: 0em 0em 0.2em;
 }
+/*------------------------------------------------------------------------------
+|                               My stuff view
+|-----------------------------------------------------------------------------*/
+.mystuff h2 {
+  margin: 1em;
+  font-size: 2.2em;
+}
+.mystuff img {
+  max-width: 1.3em;  
+  max-height: 1.3em; 
+}
 
+.mystuff section {
+  max-width: 70em;
+  display:flex;
+  flex-direction: column;
+  background-color:var(--offwhite);
+  margin: 2em;
+  border-radius: 0.8em;
+}
+.sbox {
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-content: center;
+  background-color:var(--bluetint);
+  margin: none;
+  padding: 0.5em;
+  border: 0.1em solid var(--softgray);
+  border-radius: 0.8em;
+}
+
+.mystuff p,a {
+  margin: 1em;
+  display: inline;
+}
+/*------------------------------------------------------------------------------
+|                               View a sheet page
+|-----------------------------------------------------------------------------*/
+
+.vsheet{
+  background-color:var(--offwhite);
+  border-radius: 0.8em;
+  margin:1em;
+  padding:0.5em;
+  font-size: 1.5rem;
+  display:flex;
+  flex-direction: column;
+}
+.vsheet h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  padding:0.5em;
+  margin:0.5em;
+}
+.vsheet p {
+  border: 0.1em dotted var(--dullblue);
+  padding:0.5em;
+}
+.vsheet thead {
+  border-bottom:0.1em solid var(--dullblue) ;
+}
+
+.vsheet table {
+  align-self: center;
+  border: 0.1em solid var(--dullblue);
+  width:100%;
+  margin:1em;
+}
+
+.vsheet th, .vsheet td {
+text-align: center;
+padding:0.5em;
+border-radius: 0.8em;
+}
 /*------------------------------------------------------------------------------
 |                               Error Styles
 |-----------------------------------------------------------------------------*/
