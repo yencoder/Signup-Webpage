@@ -42,10 +42,8 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log in</title>
-    <link rel="stylesheet" href="styles/master.css" />
+  <?php $page_title = "Log in"; ?>
+    <?php include "includes/metadata.php" ?>
   </head>
   <body class="logincreate">
     <?php include 'includes/header.php';?>
