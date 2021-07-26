@@ -64,7 +64,7 @@ footer {
   padding: 0.2em;
 }
 /* -------------------------------- home.php -------------------------------- */
-.home {
+.home, .myProfile {
   font-size: 1.2rem;
   font-family: 'Comfortaa', cursive;
   color: var(--offblack);
@@ -184,14 +184,13 @@ footer {
 .signup span{
   font-size: small;
 }
-/* -------------------------------- login.php -------------------------------- */
-
-.logincreate h2 {
+/* --------------------------login.php & create.php -------------------------- */
+.logincreate h2, .logout h2{
   text-align: center;
   font-size: 2.8rem;
 }
 
-.logincreate body{
+.logincreate body, .logout{
   font-size: 1.2rem;
 }
 
@@ -206,7 +205,7 @@ footer {
   background-color: #BFD7EA;
 }
 
-.logincreate form button {
+.logincreate form button, .logout button {
   font-size: 1.2rem;
   background-color: #0B3954;
   color: #FEFFFE;
@@ -217,8 +216,7 @@ footer {
   width:100%;
 }
 
-.logincreate form a:hover,
-.logincreate form button:hover {
+.logincreate form a:hover, .logincreate form button:hover, .logout button:hover {
   opacity: 0.8;
 }
 
@@ -245,14 +243,24 @@ footer {
   float: right;
 }
 
-.logincreate form {
-  margin: 5em auto 5em auto; 
+.logincreate form, .logout section{
+  margin: 5em auto; 
   max-width: 36em;
   background-color:#FEFFFE ;
   border-radius: 1em;
   box-shadow: 0.7em 0.7em 0.7em #082638;
 }
-
+/* -------------------------------- logout.php -------------------------------- */
+.logout h2 { margin: 0.5em auto; }
+.logout form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logout button { 
+  width:40%;
+  margin-bottom: 1.5em;
+}
 /* -------------------------------- search.php -------------------------------- */
 .searchform{
   display: flex;
