@@ -11,18 +11,18 @@ $userid = $_SESSION['userid'];
 include 'includes/library.php';
 $pdo = connectdb();
 
-$query = "SELECT * FROM signin_info where creatorid = ?";
+$sheetid = $_GET['sheetid'];
+$query = "SELECT * FROM signin_info where sheetid = ? and creatorid = ?";
 $stmt=$pdo->prepare($query);
-$results = $stmt->execute([$userid]);
+$results = $stmt->execute(array($sheetid,$userid));
 $t1row = $stmt->fetch();
 
-$sheetid = $t1row['sheetid'];
 $query = "SELECT * FROM slot_info where sheetid = ?";
 $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);
 $t2row = $stmt->fetch();
 
-$query = "SELECT title, timeslot, user FROM slot_info WHERE sheetid = ?";
+$query = "SELECT * FROM slot_info WHERE sheetid = ?";
 $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);
 if (!$stmt) {
@@ -34,21 +34,16 @@ $table = $stmt->fetchAll();
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>View Sign Up Sheet</title>
-    <link rel="stylesheet" href="styles/master.css" />
+  <?php $page_title = "View Sign up sheet"; ?>
+    <?php include "includes/metadata.php" ?>
   </head>
   <body>
     <?php include 'includes/header.php'?>
     <section class = "vsheet">
-    <!-- Title of the sheet should be selected from table in the database and displayed first -->
     <h1><?php echo $t1row['title'] ?></h1>
     
-    <!-- The description from the table should be put next -->
     <p><?php echo $t1row['description'] ?></p>
 
-    <!-- Each available or taken slot should be displayed with sections Title, Time then Name -->
     <table>
    <thead>
        <tr>
@@ -66,16 +61,13 @@ $table = $stmt->fetchAll();
       <?php echo "$r[user]"; // FIX THIS
       $name="$r[user]";
       if($name==null): ?>
-      <a href="">Register</a>      
+      ---     
       <?php endif ?>
       </td>
     </tr>
      <?php endforeach ?>  
    </tbody>
    </table>
-
-    <!-- Each time a person signs up. the tables are updated. numofpeoplesignedup in the first table.
-    and add the name and email to the second table. -->
    </section>
     <?php include "includes/footer.php" ?>
   </body>
