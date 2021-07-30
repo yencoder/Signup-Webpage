@@ -1,13 +1,18 @@
 <?php
+session_start();
 include 'includes/library.php';
 $pdo = connectdb();
-
+$userid = $_SESSION['userid'];
+if(!isset($_SESSION['username'])){
+  //no user info, redirect
+header("Location:login.php");
+exit();
+}
 $errors = array(); //declare empty array to add errors too
 
 //get name from post or set to NULL if doesn't exist
 $title = $_POST['title'] ?? null;
 $description = $_POST['description'] ?? null;
-$date = $_POST['date'] ?? null;
 $privacy = $_POST['status'] ?? null;
 
 
@@ -27,11 +32,13 @@ if (isset($_POST['save'])) {
     $errors['privacy'] = true;
 }
       //saved page
-   if(count($errors)=== 0){           
-    $query = "INSERT into signin_info values (NULL,?,?,?,?)";
+   if(count($errors)=== 0){
+   // $qry = "SELECT * FROM signup_users WHERE userid = ?";
+    //$stmt = $pdo->prepare($qry)->execute;         
+    $query = "INSERT into signin_info values (NULL,?,?,$userid,?,NULL,NULL, Now())"; 
     //prepare & execute query
-    $stmt = $pdo->prepare($query)->execute([$title,$description,$date,$privacy]);
-      header("Location: viewpage.php");  //<script type="text/javascript"> alert('Information is Saved!'); </script>
+    $stmt = $pdo->prepare($query)->execute([$title,$description,$privacy]);
+      header("Location: timeslot.php");  
          exit;
     }
     }
@@ -53,21 +60,20 @@ if (isset($_POST['save'])) {
           <h2>
               Create Your Sign Up Sheet
           </h2>
+          <h3>
+            *****Step One*****
+          </h3>
             <div class="input">
                 <label for="title">Sheet Title</label>
                 <input id="title" name="title" type="text" placeholder="COIS 3420 Project" value="<?=$title?>"/>
-                <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a Sheet Title</span>
+                <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a sheet title</span>
               </div>
               <div class="input">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="50" rows="5" value="<?=$description?>"></textarea>
-                <span class="error <?=!isset($errors['description']) ? 'hidden' : "";?>">Please Write a Description</span>
+                <span class="error <?=!isset($errors['description']) ? 'hidden' : "";?>">Please enter your description</span>
               </div>
-              <div class="input">
-                <label for="date">Time Slot</label>
-                <input id="date" name="date" type="datetime-local" placeholder="YYYY-MM-DD"/>
-                <button id="add" name="add">+ ADD</button>
-              </div>
+
               <fieldset>
                 <legend>Privacy</legend>    
                 <div>
@@ -80,7 +86,7 @@ if (isset($_POST['save'])) {
                 </div>          
               </fieldset>
               <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
-              <button id="save" name='save'>Save</button>
+              <button id="save" name='save'>Save </button>
           </form>
   </section>
     <?php include "includes/footer.php" ?>
