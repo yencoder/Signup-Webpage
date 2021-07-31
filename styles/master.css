@@ -378,6 +378,61 @@ padding:0.5em;
 border-radius: 0.8em;
 }
 /*------------------------------------------------------------------------------
+|                               Register
+|-----------------------------------------------------------------------------*/
+
+.reg form {
+  text-align: center;
+  padding:1em;
+  margin:2em;
+  max-width: 20em;
+  background-color: var(--offwhite);
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+.reg {
+ font-size: 1.3em;
+}
+
+.reg h2{
+  font-size: 1.5em;
+}
+
+.reg p, .reg a {
+  margin:0.5em;
+  text-decoration:none;
+}
+
+.reg h2, div, button {
+  padding:0.5em;
+}
+.reg form button,.reg form a {
+  font-size: 1rem;
+  background-color: #0B3954;
+  color: #FEFFFE;
+  padding: 0.7em 1em;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+}
+
+.reg form button:hover,.reg form a:hover {
+  opacity: 0.8;
+}
+
+/*------------------------------------------------------------------------------
+|                               View slot details
+|-----------------------------------------------------------------------------*/
+.vslot {
+  font-size: 1.2em;
+  background-color: var(--softgray);
+  border: 0.2em solid var(--offblack);
+  border-radius: 0.8em;
+  margin:2em;
+  padding:0.5em;
+}
+/*------------------------------------------------------------------------------
 |                               Error Styles
 |-----------------------------------------------------------------------------*/
 
