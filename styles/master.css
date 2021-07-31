@@ -351,7 +351,7 @@ footer {
   display:flex;
   flex-direction: column;
 }
-.vsheet h1 {
+.vsheet h2 {
   text-align: center;
   font-size: 2.8rem;
   padding:0.5em;
