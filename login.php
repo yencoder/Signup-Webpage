@@ -55,7 +55,6 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
         <label for="uname">Username</label>
         <input id ="uname" type="text" placeholder="Enter Username" name="uname" required value="<?=$user;?>">
           </div>
-          <div>
            <div>
         <label for="psw">Password</label>
         <input id = "psw" type="password" placeholder="Enter Password" name="psw" required value="<?=$pass;?>"> 
