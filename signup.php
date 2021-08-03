@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'includes/header.php';
 include 'includes/library.php';
 $pdo = connectdb();
 $userid = $_SESSION['userid'];
@@ -54,7 +54,7 @@ if (isset($_POST['save'])) {
     <link rel="stylesheet" href="styles/master.css" />
   </head>
   <body>
-    <?php include 'includes/header.php';?>
+   
     <section class="signup">
           <form id="signupform" action="<?=htmlentities($_SERVER['PHP_SELF']);?>" method="post" novalidate>
           <h2>
