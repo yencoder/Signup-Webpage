@@ -105,12 +105,12 @@ footer {
   font-family: 'Indie Flower', cursive;
   margin-bottom: 0.5em;
 }
-/* -------------------------------- signup.php -------------------------------- */
-.signup{
+/* ---------------------- signup.php & timeslot.php-------------------------------- */
+.signup, .timeslot{
   display: flex;
   justify-content: center;
 }
-.signup form{
+.signup form, .timeslot form{
   background-color: white;
   border: solid grey;
   border-radius: 1em;
@@ -121,32 +121,35 @@ footer {
   display: flex;
   flex-direction: column;
   margin-top: 3em;
-  margin-bottom: 5em;
 }
-.signup form h2{
+.signup form h2, .timeslot form h2, .delete form h3{
   font-size: 1.7em;
   margin-top: 1em;
   margin-left: 1em;
   margin-right: 1em;
   font-weight: bold;
 }
-.signup .input{
+.signup form h3, .timeslot form h3{
+  font-size: 1em;
+  color:red;
+}
+.signup .input, .timeslot .input{
   display: flex;
   flex-direction: column;
   font-size: 1.5em;
   margin: 1em 1em;
 }
-.signup .input label{
+.signup .input label, .timeslot .input label{
   margin-bottom: 0.2em;
 }
-.signup input{
+.signup input, .timeslot input{
   border-style: none;
   border-radius: 2em;
   background-color: #bfd7ea;
   line-height: 2.5em;
   padding-left: 0.8em;
   padding-right: 0.5em;
-  margin-bottom: 0.2em;
+
   outline: none;
 }
 .signup textarea{
@@ -163,7 +166,7 @@ footer {
   margin-top: 0.5em;
   font-size: 1em;
 }
-.signup button{
+.signup button, .timeslot button{
   background-color: #0b3954;
   border-radius: 2em;
   color: white;
@@ -171,17 +174,17 @@ footer {
   font-size: 1em;
   padding:0.3em 0.9em;
 }
-.signup .input button{
+.timeslot .input button{
   font-size: 0.6em;
   margin-top: 0.1em;
   width: 20%;
   margin-left: 40%;
 }
-.signup button:hover{
+.signup button:hover, .timeslot button:hover{
   background-color: #061d2b;
 }
 
-.signup span{
+.signup span, .timeslot span{
   font-size: small;
 }
 /* --------------------------login.php & create.php -------------------------- */
