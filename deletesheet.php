@@ -1,6 +1,7 @@
 <?php
 require "includes/header.php";
 $userid = $_SESSION['userid'];
+$sheetid = $_SESSION['sheetid'];
 
 // CONNECT TO DATABASE
 include 'includes/library.php';
