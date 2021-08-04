@@ -45,12 +45,7 @@ $table = $stmt->fetchAll();
             <tr>
               <td><?php echo "$r[title]"; ?></td>
               <td><?php echo "$r[timeslot]"; ?></td>
-              <td><?php echo "$r[user]"; // FIX THIS
-                  $name="$r[user]";
-                  if($name==null): ?>
-                    ---     
-                  <?php endif ?>
-              </td>
+              <td><?php echo "$r[user]"; ?></td>
             </tr>
           <?php endforeach ?>  
         </tbody>
