@@ -16,7 +16,6 @@ if(isset($_POST['add'])){
     $query = "INSERT into slot_info values (NULL,$sheetid,$userid,?)"; //foreign key
     //prepare & execute query
     $stmt = $pdo->prepare($query)->execute([$date]);
-    $id=$pdo->lastInsertId();
   }
   }
 
