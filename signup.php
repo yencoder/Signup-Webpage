@@ -38,6 +38,7 @@ if (isset($_POST['save'])) {
     $query = "INSERT into signin_info values (NULL,?,?,$userid,?,NULL,NULL, Now())"; 
     //prepare & execute query
     $stmt = $pdo->prepare($query)->execute([$title,$description,$privacy]);
+    $_SESSION['sheetid']=$pdo->lastInsertId();
       header("Location: timeslot.php");  
          exit;
     }
