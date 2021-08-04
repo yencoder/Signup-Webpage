@@ -2,7 +2,6 @@
 require "includes/header.php";
 $userid = $_SESSION['userid'];
 $sheetid = $_GET['sheetid'];
-
 // CONNECT TO DATABASE
 include 'includes/library.php';
 $pdo = connectdb();
@@ -16,7 +15,6 @@ $query = "SELECT * FROM slot_info where sheetid=?";
 $stmt=$pdo->prepare($query);                        
 $slots = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
-
 // ERROR VERIFICATION
 if (isset($_POST['delete'])) {    
   $query = "DELETE FROM `signin_info` WHERE sheetid=?";
@@ -52,11 +50,11 @@ if (isset($_POST['delete'])) {
           <p class="label">Time Slots</p>
           <div class="inforows">
             <?php if($slots==null):?><p>You have not signed up in any slots</p><?php endif ?>
-            <?php foreach($slots as $r): ?>
+            <?php foreach($slots as $r):?>
               <div class="sbox">
                 <div>
-                  <p>Title: <?php echo "$r[title]"; ?></p>
-                  <p>Date and time: <?php echo "$r[timeslot]"; ?></p>
+                  <p>Title: <?php echo "$r[title]";?></p>
+                  <p>Date and time: <?php echo "$r[timeslot]";?></p>
                 </div>
               </div>
             <?php endforeach ?>

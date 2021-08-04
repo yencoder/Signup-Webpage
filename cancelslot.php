@@ -4,13 +4,13 @@ require "includes/header.php";
 include 'includes/library.php';
 $pdo = connectdb();
 $slotid = $_GET['slotid'];
-
+// POST SUBMISSION
 if (isset($_POST['submit'])) {
     $query = "DELETE FROM `slot_info` WHERE slotid=?";
     $stmt = $pdo->prepare($query)->execute([$slotid]);
     // REDIRECT
     header("Location:mystuffview.php");
-    exit();  
+    exit();
 }
 ?>
 <!DOCTYPE html>

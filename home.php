@@ -6,7 +6,7 @@
     <?php include "includes/metadata.php" ?>
   </head>
   <body>
-    <?php include 'includes/header.php';?>
+    <?php include 'includes/header.php'; ?>
     <div class="content">
       <section class="home">
         <h2>Group Organizing Made Easy</h2>

@@ -9,7 +9,6 @@ $confirmPassword = trim(filter_var($_POST['confirmPassword'] ?? null, FILTER_SAN
 $email = trim(filter_var($_POST['email'] ?? null, FILTER_SANITIZE_EMAIL));
 $pictureErrorMessage = "";
 $newname = "";
-
 // CHECK AND MOVE PROFILE PICTURE
 function checkAndMoveFile($filekey, $sizelimit, $newname) {
   try {
@@ -51,12 +50,10 @@ function checkAndMoveFile($filekey, $sizelimit, $newname) {
     $errors['pictureError'] = true;
   }
 }
-
 // ENSURE THAT THERE IS INFORMATION IN $_POST
 if (isset($_POST['submit'])) {
   // CONNECT TO THE DATABASE
   $pdo = connectDB();
-
   // CHECK CREDITIONALS
   // CHECK USERNAME FIELD
   if(empty($username)) { $errors['emptyUsername'] = true; }
@@ -67,7 +64,6 @@ if (isset($_POST['submit'])) {
   $stmt->execute([$username]);
   $results = $stmt->fetch();
   if ($results) { $errors['usernameExists'] = true; }
-  
   // CHECK EMAIL FIELD
   if(empty($email)) { $errors['emptyEmail'] = true; }
   elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['incorrectEmail'] = true; }
@@ -77,7 +73,6 @@ if (isset($_POST['submit'])) {
   $stmt->execute([$email]);
   $results = $stmt->fetch();
   if ($results) { $errors['emailExists'] = true; }
-  
   // CHECK PASSWORD FIELD
   $upperCase = preg_match('@[A-Z]@', $password);
   $lowerCase = preg_match('@[a-z]@', $password);
@@ -93,7 +88,6 @@ if (isset($_POST['submit'])) {
   }
   // CHECK CONFIRM PASSWORD FIELD
   if ($password != $confirmPassword) { $errors['confirmPassword'] = true; }
-
   // CHECK PROFILE PICTURE
   if (is_uploaded_file($_FILES['profilePicture']['tmp_name'])) {
     // CUSTOMIZE FILE NAME
@@ -107,7 +101,6 @@ if (isset($_POST['submit'])) {
     $filename = $fileroot.$uniqueID.".".$ext;  //build new filename
     $newname = $path.$filename; //add path the file name
   }
-
   // ERROR VERIFICATION
   if(!sizeof($errors)) {
     // INSERT CREDITIONALS INTO THE DATABASE
@@ -169,9 +162,7 @@ if (isset($_POST['submit'])) {
             <input id="profilePicture" type="file" name="profilePicture">
             <span class="error <?=!isset($errors['pictureError']) ? 'hidden' : "";?>">$pictureErrorMessage</span>
           </div>
-          <div>
-            <button type="submit" name="submit" value="Upload">Create account</button>
-          </div>           
+          <div><button type="submit" name="submit" value="Upload">Create account</button></div>           
         </div>    
       </form>
     </section>

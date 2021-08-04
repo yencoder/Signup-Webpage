@@ -4,10 +4,8 @@ $errors = array();
 // GET AND SANTIZE EACH INPUT
 $user = trim(filter_var($_POST['uname'] ?? null, FILTER_SANITIZE_STRING));
 $pass = trim(filter_var($_POST['psw'] ?? null, FILTER_SANITIZE_STRING));
-
 // IF COOKIES ALREADY EXISTS
 if(isset($_COOKIE['mysitecookie'])) { $user=$_COOKIE['mysitecookie']; }
-
 // POST SUBMISSION
 if (isset($_POST['submit'])) {
   // CONNECT TO DATABASE

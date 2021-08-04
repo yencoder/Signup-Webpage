@@ -18,17 +18,17 @@ $results = $stmt->fetch();
   </head>
   <body>
     <section class="myProfile">
-        <form method="POST">
-            <h2>My Profile</h2>
-            <div>
-                <p>Username</p>
-                <p><?php echo $results['username']; ?></p>
-            </div>
-            <div>
-                <p>Email</p>
-                <p><?php echo $results['email']; ?></p>
-            </div>
-        </form>
+      <form method="POST">
+        <h2>My Profile</h2>
+        <div>
+          <p>Username</p>
+          <p><?php echo $results['username']; ?></p>
+        </div>
+        <div>
+          <p>Email</p>
+          <p><?php echo $results['email']; ?></p>
+        </div>
+      </form>
     </section>
     <?php include "includes/footer.php" ?>
   </body>

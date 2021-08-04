@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
   <head>
     <?php $page_title = "Reset Password"; ?>
     <?php include "includes/metadata.php" ?>
-    <link rel="stylesheet" href="styles/master.css" />
+    <link rel="stylesheet" href="styles/master.css"/>
   </head>
   <body class="logincreate">
     <?php include 'includes/header.php';?>

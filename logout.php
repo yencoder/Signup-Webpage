@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="styles/master.css"/>
   </head>
   <body class="logout">
-    <?php include 'includes/header.php';?>
+    <?php include 'includes/header.php'; ?>
     <section>
       <form method="POST">
         <h2>You have been logged out</h2>
