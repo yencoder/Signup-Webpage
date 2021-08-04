@@ -1,6 +1,5 @@
 <?php
 require_once('includes/library.php');
-
 // CREATE ARRAY FOR ERRORS
 $errors = array();
 // GET AND SANTIZE EACH INPUT

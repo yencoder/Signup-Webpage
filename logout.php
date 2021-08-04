@@ -16,15 +16,15 @@ if (isset($_POST["submit"])) {
   <head>
     <?php $page_title = "Logout"; ?>
     <?php include "includes/metadata.php" ?>
-    <link rel="stylesheet" href="styles/master.css" />
+    <link rel="stylesheet" href="styles/master.css"/>
   </head>
   <body class="logout">
     <?php include 'includes/header.php';?>
     <section>
-        <form method="POST">
-            <h2>You have been logged out</h2>
-            <button type="submit" name="submit">Thank you!</button>
-        </form>
+      <form method="POST">
+        <h2>You have been logged out</h2>
+        <button type="submit" name="submit">Thank you!</button>
+      </form>
     </section>
     <?php include "includes/footer.php" ?>
   </body>

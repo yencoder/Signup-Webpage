@@ -17,6 +17,7 @@ $stmt=$pdo->prepare($query);
 $slots = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
 
+// ERROR VERIFICATION
 if (isset($_POST['delete'])) {    
   $query = "DELETE FROM `signin_info` WHERE sheetid=?";
   $stmt = $pdo->prepare($query)->execute([$sheetid]);

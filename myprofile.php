@@ -1,7 +1,6 @@
 <?php
 require "includes/header.php";
 $userid = $_SESSION['userid'];
-
 // CONNECT TO DATABASE
 include 'includes/library.php';
 $pdo = connectdb();

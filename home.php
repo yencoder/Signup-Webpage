@@ -7,18 +7,15 @@
   </head>
   <body>
     <?php include 'includes/header.php';?>
-    <!-- Sign up content -->
     <div class="content">
       <section class="home">
         <h2>Group Organizing Made Easy</h2>
         <a href="signup.php"><button id="signup" name="singup">Sign up <i class="fas fa-pencil-alt"></i></button></a>
       </section>
-      <!-- What we Offer -->
       <section class="home">
         <h2>What we Offer</h2>
         <p>A fast and easy way to organize, blah blah blah</p>
       </section>
-      <!-- About us -->
       <section class="home">
         <h2>Meet the Creators</h2>
         <p>
