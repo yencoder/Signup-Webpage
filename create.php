@@ -1,9 +1,7 @@
 <?php
 require_once('includes/library.php');
-
 // CREATE ARRAY FOR ERRORS
 $errors = array();
-
 // GET AND SANTIZE EACH INPUT
 $username = trim(filter_var($_POST['username'] ?? null, FILTER_SANITIZE_STRING));
 $password = trim(filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING));
@@ -61,45 +59,31 @@ if (isset($_POST['submit'])) {
 
   // CHECK CREDITIONALS
   // CHECK USERNAME FIELD
-  if(empty($username)) {
-    $errors['emptyUsername'] = true;
-  }
-  elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-    $errors['usernameChars'] = true;
-  }
+  if(empty($username)) { $errors['emptyUsername'] = true; }
+  elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) { $errors['usernameChars'] = true; }
   // IF USER ALREADY EXISTS IN THE DATABASE
   $query = "SELECT * FROM `signup_users` WHERE username=?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$username]);
   $results = $stmt->fetch();
-  if ($results) {
-    $errors['usernameExists'] = true;
-  }
+  if ($results) { $errors['usernameExists'] = true; }
   
   // CHECK EMAIL FIELD
-  if(empty($email)) {
-    $errors['emptyEmail'] = true;
-  }
-  elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors['incorrectEmail'] = true;
-  }
+  if(empty($email)) { $errors['emptyEmail'] = true; }
+  elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['incorrectEmail'] = true; }
   // IF EMAIL ALREADY EXISTS IN THE DATABASE
   $query = "SELECT * FROM `signup_users` WHERE email=?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$email]);
   $results = $stmt->fetch();
-  if ($results) {
-    $errors['emailExists'] = true;
-  }
+  if ($results) { $errors['emailExists'] = true; }
   
   // CHECK PASSWORD FIELD
   $upperCase = preg_match('@[A-Z]@', $password);
   $lowerCase = preg_match('@[a-z]@', $password);
   $numberCase = preg_match('@[0-9]@', $password);
   $specialCase = preg_match('@[^\w]@', $password);
-  if(empty($password)) {
-    $errors['emptyPassword'] = true;
-  }
+  if(empty($password)) { $errors['emptyPassword'] = true; }
   elseif (!$upperCase || !$lowerCase || !$numberCase || !$specialCase || strlen($password) < 8) {
     if (!$upperCase) { $errors['passwordCharsUpper'] = true; }
     if (!$lowerCase) { $errors['passwordCharsLower'] = true; }
@@ -108,9 +92,7 @@ if (isset($_POST['submit'])) {
     if (!strlen($password) < 8) { $errors['passwordLength'] = true; }
   }
   // CHECK CONFIRM PASSWORD FIELD
-  if ($password != $confirmPassword) {
-    $errors['confirmPassword'] = true;
-  }
+  if ($password != $confirmPassword) { $errors['confirmPassword'] = true; }
 
   // CHECK PROFILE PICTURE
   if (is_uploaded_file($_FILES['profilePicture']['tmp_name'])) {

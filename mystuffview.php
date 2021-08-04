@@ -14,14 +14,16 @@ $query = "SELECT * FROM slot_info where user = ?";
 $stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$username]);                
 $slots = $stmt->fetchAll(); 
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
   <?php $page_title = "My stuff view"; ?>
     <?php include "includes/metadata.php" ?>
   </head>
-  <body class="mystuff">  
+  <body class="mystuff"> 
    <section>
    <h2>My Sign-Up Sheets</h2>
    <?php  if($sheets==null):?>
@@ -37,8 +39,8 @@ $slots = $stmt->fetchAll();
      </div>
      <div>
      <a href="viewsheet.php?sheetid=<?php echo $r['sheetid']; ?>"><img src="images/view.png" alt="view sheet" title="view"></a>
-     <a href="editsheet.php"><img src="images/edit.png" alt="edit sheet" title="edit sheet"></a>    
-     <a href="deletesheet.php"><img src="images/delete.png" alt="delete sheet" title="delete sheet"></a>
+     <a href="editsheet.php?sheetid=<?php echo $r['sheetid']; ?>"><img src="images/edit.png" alt="edit sheet" title="edit sheet"></a>    
+     <a href="deletesheet.php?sheetid=<?php echo $r['sheetid']; ?>"><img src="images/delete.png" alt="delete sheet" title="delete sheet"></a>
      </div>
      </div>  
    </div>    

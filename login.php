@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
       session_start();
       $_SESSION['username'] = $user;
       $_SESSION['userid'] = $row['userid'];
-
+      
       header("Location:mystuffview.php");
       exit();
 
@@ -36,9 +36,7 @@ if (isset($_POST['submit'])) { //only do this code if the form has been submitte
   if (isset($_POST['remember']))
   setcookie("mysitecookie",$username,time()+60*60*24*30*12);
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>

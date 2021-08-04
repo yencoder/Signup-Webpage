@@ -17,19 +17,21 @@ $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);                
 $sheetinfo = $stmt->fetch(); 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php $page_title = "View your timeslot details"; ?>
+  <?php $page_title = "View your timeslot details"; ?>
     <?php include "includes/metadata.php" ?>
   </head>
   <body> 
-    <div class="home">
-      <p>Title: <?php echo "$slotinfo[title]"; ?></p>
-      <p>The timeslot you registered for is: <?php echo "$slotinfo[timeslot]"; ?></p>
-      <p>Description:</p>
-      <p><?php echo "$sheetinfo[description]"; ?></p>
-    </div>
+  <div class="vslot">
+  <p>Title: <?php echo "$slotinfo[title]"; ?></p>
+  <p>The timeslot you registered for is: <?php echo "$slotinfo[timeslot]"; ?></p>
+  <p>Description:</p>
+  <p><?php echo "$sheetinfo[description]"; ?></p>
+   
+</div>
     <?php include "includes/footer.php" ?>  
-  </body>
+    </body>
 </html>

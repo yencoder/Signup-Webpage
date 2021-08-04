@@ -3,34 +3,25 @@ require_once('includes/library.php');
 
 // CREATE ARRAY FOR ERRORS
 $errors = array();
-
 // GET AND SANTIZE EACH INPUT
 $email = trim(filter_var($_POST['email'] ?? null, FILTER_SANITIZE_EMAIL));
 $password = trim(filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING));
 $confirmPassword = trim(filter_var($_POST['confirmPassword'] ?? null, FILTER_SANITIZE_STRING));
-
 // ENSURE THAT THERE IS INFORMATION IN $_POST
 if (isset($_POST['submit'])) {
   // CONNECT TO THE DATABASE
   $pdo = connectDB();
-
   // CHECK CREDITIONALS  
   $query = "SELECT email, `password` FROM `signup_users` WHERE email=?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$email]);
   $results = $stmt->fetch();
   // CHECK EMAIL FIELD
-  if(empty($email)) {
-    $errors['emptyEmail'] = true;
-  }
+  if(empty($email)) { $errors['emptyEmail'] = true; }
   else {
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $errors['incorrectEmail'] = true;
-    }
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['incorrectEmail'] = true; }
     // IF EMAIL DOES NOT EXIST IN THE DATABASE
-    elseif (!$results) {
-      $errors['emailDoesNotExist'] = true;
-    }
+    elseif (!$results) { $errors['emailDoesNotExist'] = true; }
     // IF EMAIL EXISTS IN THE DATABASE
     else {
       // CHECK PASSWORD FIELD
@@ -38,14 +29,10 @@ if (isset($_POST['submit'])) {
       $lowerCase = preg_match('@[a-z]@', $password);
       $numberCase = preg_match('@[0-9]@', $password);
       $specialCase = preg_match('@[^\w]@', $password);
-      if(empty($password)) {
-        $errors['emptyPassword'] = true;
-      }
+      if(empty($password)) { $errors['emptyPassword'] = true; }
       else {
         // IF SAME AS OLD PASSWORD
-        if (password_verify($password, $results['password'])) {
-          $errors['oldPassword'] = true;
-        }
+        if (password_verify($password, $results['password'])) { $errors['oldPassword'] = true; }
         elseif (!$upperCase || !$lowerCase || !$numberCase || !$specialCase || strlen($password) < 8) {
           if (!$upperCase) { $errors['passwordCharsUpper'] = true; }
           if (!$lowerCase) { $errors['passwordCharsLower'] = true; }
@@ -55,12 +42,9 @@ if (isset($_POST['submit'])) {
         }
       }
       // CHECK CONFIRM PASSWORD FIELD
-      if ($password != $confirmPassword) {
-        $errors['confirmPassword'] = true;
-      }
+      if ($password != $confirmPassword) { $errors['confirmPassword'] = true; }
     }
   }
-
   // ERROR VERIFICATION
   if(!sizeof($errors)) {
     // INSERT CREDITIONALS INTO THE DATABASE

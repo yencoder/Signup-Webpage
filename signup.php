@@ -2,49 +2,40 @@
 require 'includes/header.php';
 include 'includes/library.php';
 $pdo = connectdb();
+if ($_SESSION == null) {$_SESSION['userid'] = 0;}
 $userid = $_SESSION['userid'];
-if(!isset($_SESSION['username'])){
-  //no user info, redirect
-header("Location:login.php");
-exit();
-}
-$errors = array(); //declare empty array to add errors too
 
+$errors = array(); //declare empty array to add errors too
 //get name from post or set to NULL if doesn't exist
 $title = $_POST['title'] ?? null;
 $description = $_POST['description'] ?? null;
 $privacy = $_POST['status'] ?? null;
 
-
-
 if (isset($_POST['save'])) { 
-
-    //validate user has entered a name
-    if (!isset($title) || strlen($title) === 0) {
-        $errors['title'] = true;
-    }
-    //validate user has entered a correct gps coordinate
-    if (!isset($description) || strlen($description) === 0) {
-      $errors['description'] = true;
+  //validate user has entered a name
+  if (!isset($title) || strlen($title) === 0) {
+    $errors['title'] = true;
   }
-
-    if (empty($privacy)) {
+  //validate user has entered some description
+  if (!isset($description) || strlen($description) === 0) {
+    $errors['description'] = true;
+  }
+  if (empty($privacy)) {
     $errors['privacy'] = true;
-}
-      //saved page
-   if(count($errors)=== 0){
-   // $qry = "SELECT * FROM signup_users WHERE userid = ?";
-    //$stmt = $pdo->prepare($qry)->execute;         
-    $query = "INSERT into signin_info values (NULL,?,?,$userid,?,NULL,NULL, Now())"; 
+  }
+  //saved page
+  if(count($errors)=== 0){
+    // $qry = "SELECT * FROM signup_users WHERE userid = ?";
+    //$stmt = $pdo->prepare($qry)->execute;
+    $query = "INSERT into signin_info values (NULL,?,?,$userid,?,NULL,NULL,Now())"; 
     //prepare & execute query
     $stmt = $pdo->prepare($query)->execute([$title,$description,$privacy]);
     $_SESSION['sheetid']=$pdo->lastInsertId();
-      header("Location: timeslot.php");  
-         exit;
-    }
-    }
+    header("Location: timeslot.php");  
+    exit;
+  }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,15 +46,10 @@ if (isset($_POST['save'])) {
     <link rel="stylesheet" href="styles/master.css" />
   </head>
   <body>
-   
     <section class="signup">
           <form id="signupform" action="<?=htmlentities($_SERVER['PHP_SELF']);?>" method="post" novalidate>
-          <h2>
-              Create Your Sign Up Sheet
-          </h2>
-          <h3>
-            *****Step One*****
-          </h3>
+          <h2>Create Your Sign Up Sheet</h2>
+          <h3>*****Step One*****</h3>
             <div class="input">
                 <label for="title">Sheet Title</label>
                 <input id="title" name="title" type="text" placeholder="COIS 3420 Project" value="<?=$title?>"/>
@@ -74,9 +60,8 @@ if (isset($_POST['save'])) {
                 <textarea name="description" id="description" cols="50" rows="5" value="<?=$description?>"></textarea>
                 <span class="error <?=!isset($errors['description']) ? 'hidden' : "";?>">Please enter your description</span>
               </div>
-
               <fieldset>
-                <legend>Privacy</legend>    
+                <legend>Privacy</legend>
                 <div>
                   <input id="public" name="status" type="radio" value="Y" <?=$privacy == "Y" ? 'checked' : ''?> />
                   <label for="public">Public</label>
@@ -84,7 +69,7 @@ if (isset($_POST['save'])) {
                 <div>
                   <input id="private" name="status" type="radio" value="N" <?=$privacy == "N" ? 'checked' : ''?> />
                   <label for="private">Private</label>
-                </div>          
+                </div>    
               </fieldset>
               <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
               <button id="save" name='save'>Save </button>
