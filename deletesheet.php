@@ -1,15 +1,15 @@
+
 <?php
 require "includes/header.php";
-include "includes/library.php";
 $userid = $_SESSION['userid'];
 $sheetid = $_GET['sheetid'];
 // CONNECT TO DATABASE
 include 'includes/library.php';
 $pdo = connectdb();
 // GET SIGNUP SHEET INFO
-$query = "SELECT * FROM `signin_info` WHERE sheetid=?";
+$query = "SELECT * FROM `signin_info` WHERE userid=?";
 $stmt = $pdo->prepare($query);
-$stmt->execute([$sheetid]);
+$stmt->execute([$userid]);
 $results = $stmt->fetch();
 // GET SLOT INFO
 $query = "SELECT * FROM slot_info where sheetid=?"; 
