@@ -64,7 +64,7 @@ footer {
   padding: 0.2em;
 }
 /* -------------------------------- home.php -------------------------------- */
-.home, .myProfile {
+.home, .myProfile, .delete {
   font-size: 1.2rem;
   font-family: 'Comfortaa', cursive;
   color: var(--offblack);
@@ -104,6 +104,12 @@ footer {
 .home:last-child p {
   font-family: 'Indie Flower', cursive;
   margin-bottom: 0.5em;
+}
+/* ---------------------------- myprofile.php-------------------------------------- */
+.myProfile form div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 /* ---------------------- signup.php & timeslot.php-------------------------------- */
 .signup, .timeslot{
@@ -219,11 +225,11 @@ footer {
   width:100%;
 }
 
-.logincreate form a:hover, .logincreate form button:hover, .logout button:hover {
+.logincreate form a:hover, .logincreate form button:hover, .logout button:hover, #delete:hover, #previous:hover{
   opacity: 0.8;
 }
 
-.logincreate form a {
+.logincreate form a, .delete form button{
   font-size: 1rem;
   padding: 0.5em; 
   text-decoration: none;

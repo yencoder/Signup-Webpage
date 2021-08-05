@@ -28,6 +28,10 @@ $results = $stmt->fetch();
           <p>Email</p>
           <p><?php echo $results['email']; ?></p>
         </div>
+        <div>
+          <p>Password</p>
+          <p><?php echo "********";?></p>
+        </div>
       </form>
     </section>
     <?php include "includes/footer.php" ?>
