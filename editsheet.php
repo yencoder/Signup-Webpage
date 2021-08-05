@@ -45,9 +45,6 @@ if(isset($_POST['confirm'])){
 }
 >>>>>>> e7965f8a4527eb7baf83e1071e58085118f3e936
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
