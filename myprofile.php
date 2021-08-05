@@ -16,8 +16,9 @@ if (isset($_POST['edit'])) {
   header("Location: editprofile.php");
   exit();
 } else if (isset($_POST['delete'])) {
-  
-  header("Location: home.php");
+  $query= "DELETE FROM `signup_users` WHERE userid=?";
+  $stmt = $pdo->prepare($query)->execute([$userid]);
+  header("Location: logout.php");
   exit();
 }
 ?>

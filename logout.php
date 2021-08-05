@@ -16,7 +16,6 @@ if (isset($_POST["submit"])) {
   <head>
     <?php $page_title = "Logout"; ?>
     <?php include "includes/metadata.php" ?>
-    <link rel="stylesheet" href="styles/master.css"/>
   </head>
   <body class="logout">
     <?php include 'includes/header.php'; ?>

@@ -1,28 +1,21 @@
 <?php
 require 'includes/header.php';
-//check session for whatever user info was stored
-//if(!isset($_SESSION['username'])){
-  //no user info, redirect
-//header("Location:login.php");
-//exit();
-//}
 $userid = $_SESSION['userid'];
-$sheetid = $_SESSION['sheetid'];
+$sheetid = $_GET['sheetid'];
+// CONNECT TO DATABASE
 include 'includes/library.php';
 $pdo = connectdb();
-
+// QUERY FOR SHEET INFO
 $query = "SELECT * FROM signin_info where sheetid = ?";
 $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);
 $sheets = $stmt->fetchAll();
-
+// QUERY FOR SLOT INFO
 $query = "SELECT * FROM slot_info where sheetid = '?'"; 
 $stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
-<<<<<<< HEAD
-=======
-
+// POST ADD
 if(isset($_POST['add'])) {
   // ERROR VERIFICATION
   if (!isset($date)) { $errors['date'] = true; }
@@ -37,13 +30,11 @@ if(isset($_POST['add'])) {
     $stmt = $pdo->prepare($query)->execute([$title, $date, $username, $results['email']]);
   }
 }
-
 if(isset($_POST['confirm'])){
     $query = "UPDATE `signin_info`,'slot_info' WHERE sheetid = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$sheetid]);
 }
->>>>>>> e7965f8a4527eb7baf83e1071e58085118f3e936
 ?>
 <!DOCTYPE html>
 <html lang="en">
