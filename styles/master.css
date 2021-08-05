@@ -172,7 +172,7 @@ footer {
   margin-top: 0.5em;
   font-size: 1em;
 }
-.signup button, .timeslot button{
+.signup button, .timeslot button, .myProfile button{
   background-color: #0b3954;
   border-radius: 2em;
   color: white;
@@ -194,7 +194,7 @@ footer {
   font-size: small;
 }
 /* --------------------------login.php & create.php -------------------------- */
-.logincreate h2, .logout h2{
+.logincreate h2, .logout h2, .myProfile h2{
   text-align: center;
   font-size: 2.8rem;
 }
@@ -225,7 +225,7 @@ footer {
   width:100%;
 }
 
-.logincreate form a:hover, .logincreate form button:hover, .logout button:hover, #delete:hover, #previous:hover{
+.logincreate form a:hover, .logincreate form button:hover, .logout button:hover, #delete:hover, #previous:hover, .myProfile button:hover{
   opacity: 0.8;
 }
 
@@ -409,7 +409,7 @@ border-radius: 0.8em;
   margin:0.5em;
   text-decoration:none;
 }
-.reg h2, div, button { padding:0.5em; }
+.reg h2, div, button{ padding:0.5em; }
 .reg form button,.reg form a {
   font-size: 1rem;
   background-color: #0B3954;

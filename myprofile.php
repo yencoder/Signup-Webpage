@@ -9,6 +9,17 @@ $query = "SELECT * FROM `signup_users` WHERE userid=?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$userid]);
 $results = $stmt->fetch();
+// RETREIVE PROFILE PICTURE
+$src = $results['profilePic'];
+// POST SUBMIT
+if (isset($_POST['edit'])) {
+  header("Location: editprofile.php");
+  exit();
+} else if (isset($_POST['delete'])) {
+  
+  header("Location: home.php");
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +32,10 @@ $results = $stmt->fetch();
       <form method="POST">
         <h2>My Profile</h2>
         <div>
+          <p>Profile Picture</p>
+          <img src="<?=$src?>" alt="Profile Pic" />
+        </div>
+        <div>
           <p>Username</p>
           <p><?php echo $results['username']; ?></p>
         </div>
@@ -31,6 +46,10 @@ $results = $stmt->fetch();
         <div>
           <p>Password</p>
           <p><?php echo "********";?></p>
+        </div>
+        <div>
+          <button type="submit" name="edit">Edit Profile</button>
+          <button type="submit" name="delete">Delete Account</button>
         </div>
       </form>
     </section>

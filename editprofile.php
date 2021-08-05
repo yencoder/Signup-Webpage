@@ -1,7 +1,15 @@
 <?php
-require_once('includes/library.php');
+require 'includes/header.php';
+include 'includes/library.php';
+$pdo = connectdb();
 // CREATE ARRAY FOR ERRORS
 $errors = array();
+// RETRIEVE USER CREDITIONALS
+$userid = $_SESSION['userid'];
+$query = "SELECT * FROM `signup_users` WHERE userid=?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$userid]);
+$results = $stmt->fetch();
 // GET AND SANTIZE EACH INPUT
 $username = trim(filter_var($_POST['username'] ?? null, FILTER_SANITIZE_STRING));
 $password = trim(filter_var($_POST['password'] ?? null, FILTER_SANITIZE_STRING));
@@ -50,35 +58,29 @@ function checkAndMoveFile($filekey, $sizelimit, $newname) {
     $errors['pictureError'] = true;
   }
 }
-// ENSURE THAT THERE IS INFORMATION IN $_POST
+// POST SUBMIT
 if (isset($_POST['submit'])) {
-  // CONNECT TO THE DATABASE
-  $pdo = connectDB();
   // CHECK CREDITIONALS
   // CHECK USERNAME FIELD
-  if(empty($username)) { $errors['emptyUsername'] = true; }
-  elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) { $errors['usernameChars'] = true; }
-  // IF USER ALREADY EXISTS IN THE DATABASE
-  $query = "SELECT * FROM `signup_users` WHERE username=?";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute([$username]);
-  $results = $stmt->fetch();
-  if ($results) { $errors['usernameExists'] = true; }
+  if(isset($username) && $username!=$results['username']) { 
+    if(empty($username)) { $errors['emptyUsername'] = true; }
+    elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) { $errors['usernameChars'] = true; }
+    // IF USER ALREADY EXISTS IN THE DATABASE
+    if ($username == $results['username']) { $errors['usernameExists'] = true; }
+  }
   // CHECK EMAIL FIELD
-  if(empty($email)) { $errors['emptyEmail'] = true; }
-  elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['incorrectEmail'] = true; }
-  // IF EMAIL ALREADY EXISTS IN THE DATABASE
-  $query = "SELECT * FROM `signup_users` WHERE email=?";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute([$email]);
-  $results = $stmt->fetch();
-  if ($results) { $errors['emailExists'] = true; }
+  if(isset($email) && $email!=$results['email']) { 
+    if(empty($email)) { $errors['emptyEmail'] = true; }
+    elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['incorrectEmail'] = true; }
+    // IF EMAIL ALREADY EXISTS IN THE DATABASE
+    if ($email == $results['email']) { $errors['emailExists'] = true; }
+  }
   // CHECK PASSWORD FIELD
   $upperCase = preg_match('@[A-Z]@', $password);
   $lowerCase = preg_match('@[a-z]@', $password);
   $numberCase = preg_match('@[0-9]@', $password);
   $specialCase = preg_match('@[^\w]@', $password);
-  if(empty($password)) { $errors['emptyPassword'] = true; }
+  if (empty($password)) { $errors['emptyPassword'] = true; }
   elseif (!$upperCase || !$lowerCase || !$numberCase || !$specialCase || strlen($password) < 8) {
     if (!$upperCase) { $errors['passwordCharsUpper'] = true; }
     if (!$lowerCase) { $errors['passwordCharsLower'] = true; }
@@ -100,17 +102,26 @@ if (isset($_POST['submit'])) {
     $ext = $exts[count($exts)-1]; //take the last split (contents after last period)
     $filename = $fileroot.$uniqueID.".".$ext;  //build new filename
     $newname = $path.$filename; //add path the file name
+  } else {
+    $uniqueID = $username;
+    $path = WEBROOT."www_data/";
+    $fileroot = "user_";
+    $oldname = explode("www_data/", $results['profilePic']);
+    $exts = explode(".", $results['profilePic']);
+    $ext = $exts[count($exts)-1];
+    $filename = $fileroot.$uniqueID.".".$ext;
+    $newname = $path.$filename;
   }
   // ERROR VERIFICATION
   if(!sizeof($errors)) {
     // INSERT CREDITIONALS INTO THE DATABASE
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO signup_users(userid, username, email, `password`, profilePic) VALUES (NULL,?,?,?,?)";
-    $stmt = $pdo->prepare($query)->execute([$username, $email, $password, $newname]);
+    $query = "UPDATE signup_users SET username=?, email=?, `password`=?, profilePic=? WHERE userid=?";
+    $stmt = $pdo->prepare($query)->execute([$username, $email, $password, $newname, $results['userid']]);
     // UPLOAD FILE TO SERVER
     checkAndMoveFile('profilePicture', 1024000, $newname);
     // REDIRECT
-    header("Location: login.php");
+    header("Location: myprofile.php");
     exit();
   }
 }
@@ -118,19 +129,18 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php $page_title = "Create Account"; ?>
+    <?php $page_title = "My Profile"; ?>
     <?php include "includes/metadata.php" ?>
   </head>
   <body class="logincreate">
-    <?php include 'includes/header.php';?>
     <section>
       <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" enctype="multipart/form-data">
-        <h2>Create New Account</h2>
+        <h2>Edit Profile</h2>
         <div class="container">
           <div>
             <label for="username">Username</label>
             <input id = "username" type="text" placeholder="Username" name="username" autocomplete="new-password" value="<?=$username?>">
-            <span class="error <?=!isset($errors['emptyUsername']) ? 'hidden' : "";?>">Please enter a username</span>
+            <span class="error <?=!isset($errors['emptyUsername']) ? 'hidden' : "";?>">Please enter a longer username</span>
             <span class="error <?=!isset($errors['usernameChars']) ? 'hidden' : "";?>">Username must be unique and can only contain letters, numbers, and underscores</span>
             <span class="error <?=!isset($errors['usernameExists']) ? 'hidden' : "";?>">Username taken</span>
           </div>
@@ -162,7 +172,7 @@ if (isset($_POST['submit'])) {
             <input id="profilePicture" type="file" name="profilePicture">
             <span class="error <?=!isset($errors['pictureError']) ? 'hidden' : "";?>">$pictureErrorMessage</span>
           </div>
-          <div><button type="submit" name="submit" value="Upload">Create account</button></div>           
+          <div><button type="submit" name="submit" value="Upload">CONFIRM EDITS</button></div>           
         </div>    
       </form>
     </section>

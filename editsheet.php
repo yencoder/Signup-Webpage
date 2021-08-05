@@ -15,7 +15,6 @@ $query = "SELECT * FROM slot_info where sheetid = '?'";
 $stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
