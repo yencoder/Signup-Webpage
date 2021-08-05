@@ -62,8 +62,8 @@ if (isset($_POST['save'])) {
             <input id="private" name="privacy" type="radio" value="N" <?=$privacy == "N" ? 'checked' : ''?> />
             <label for="private">Private</label>
           </div>
-          <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
         </fieldset>
+        <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
         <button id="save" name='save'>Save </button>
       </form>
     </section>
