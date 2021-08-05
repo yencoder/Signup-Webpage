@@ -1,21 +1,53 @@
 <?php
 require 'includes/header.php';
+//check session for whatever user info was stored
+//if(!isset($_SESSION['username'])){
+  //no user info, redirect
+//header("Location:login.php");
+//exit();
+//}
 $userid = $_SESSION['userid'];
-$sheetid = $_GET['sheetid'];
-// CONNECT TO DATABASE
+$sheetid = $_SESSION['sheetid'];
 include 'includes/library.php';
 $pdo = connectdb();
-// QUERY FOR SHEET INFO
+
 $query = "SELECT * FROM signin_info where sheetid = ?";
 $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);
 $sheets = $stmt->fetchAll();
-// QUERY FOR SLOT INFO
+
 $query = "SELECT * FROM slot_info where sheetid = '?'"; 
 $stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
+<<<<<<< HEAD
+=======
+
+if(isset($_POST['add'])) {
+  // ERROR VERIFICATION
+  if (!isset($date)) { $errors['date'] = true; }
+  if (!isset($title)) { $errors['emptyTitle'] = true; }
+  if(count($errors)===0) {
+    // RETRIEVE USER EMAIL
+    $query = "SELECT `email` FROM `signup_users` WHERE userid=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$userid]);
+    $results = $stmt->fetch();
+    $query = "INSERT into slot_info values (NULL, $sheetid, $userid,?,?,?,?)"; //foreign key
+    $stmt = $pdo->prepare($query)->execute([$title, $date, $username, $results['email']]);
+  }
+}
+
+if(isset($_POST['confirm'])){
+    $query = "UPDATE `signin_info`,'slot_info' WHERE sheetid = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$sheetid]);
+}
+>>>>>>> e7965f8a4527eb7baf83e1071e58085118f3e936
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +60,9 @@ $slots = $stmt->fetchAll();
   <body>
     <section class="signup">
           <form id="signupform" action="<?=htmlentities($_SERVER['PHP_SELF']);?>" method="post" novalidate>
-          <h2>Edit Your Sign Up Sheet</h2>
+          <h2>
+              Edit Your Sign Up Sheet
+          </h2>
             <div class="input">
                 <label for="title">Sheet Title</label>
                 <?php  foreach($sheets as $r): ?>
@@ -38,14 +72,16 @@ $slots = $stmt->fetchAll();
               </div>
               <div class="input">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="50" rows="5" value="<?=$r['description'];?>";></textarea>              
-                </div>
+                <?php  foreach($sheets as $r): ?>
+                <textarea name="description" id="description" cols="50" rows="5";><?= $r['description']; ?></textarea> 
+                <?php endforeach ?>             
+              </div>
               <div class="input">
                 <label for="date">Time Slot</label>
                 <ol>
             <?php  foreach($slots as $r): ?>
                 <div>
-                <li>Date and time: <?= $r['timeslot']; ?>
+                <p>Date and time: <?= $r['timeslot']; ?></p>
                 <button id="delete" name="delete">Delete</button> </li>
                 <?php endforeach ?>
             </ol>
@@ -57,17 +93,17 @@ $slots = $stmt->fetchAll();
             </div>
               </div>
               <fieldset>
-                <legend>Privacy</legend>
-                <?php  foreach($sheets as $r): ?>
+                <legend>Privacy</legend>    
                 <div>
-                  <input id="public" name="status" type="radio" value="Y" <?=$r['privacy'] == "Y" ? 'checked' : ''?> />
+                <input id="public" name="privacy" type="radio" value='Y' 
+              <?php if (isset($_POST['privacy']) && $_POST['privacy'] == "Y") echo 'checked="checked"';?>/>
                   <label for="public">Public</label>
                 </div>
                 <div>
-                  <input id="private" name="status" type="radio" value="N" <?=$r['privacy'] == "N" ? 'checked' : ''?> />
+                <input id="private" name="privacy" type="radio" value='N' 
+              <?php if (isset($_POST['privacy']) && $_POST['privacy'] == "N") echo 'checked="checked"';?>/>
                   <label for="private">Private</label>
-                </div>
-                <?php endforeach ?>       
+                </div>          
               </fieldset>
               <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
               <button id="confirm" name='confirm'>CONFIRM YOUR EDITING</button>

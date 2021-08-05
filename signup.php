@@ -55,15 +55,15 @@ if (isset($_POST['save'])) {
         <fieldset>
           <legend>Privacy</legend>
           <div>
-            <input id="public" name="status" type="radio" value="Y" <?=$privacy == "Y" ? 'checked' : ''?> />
+            <input id="public" name="privacy" type="radio" value="Y" <?=$privacy == "Y" ? 'checked' : ''?> />
             <label for="public">Public</label>
           </div>
           <div>
-            <input id="private" name="status" type="radio" value="N" <?=$privacy == "N" ? 'checked' : ''?> />
+            <input id="private" name="privacy" type="radio" value="N" <?=$privacy == "N" ? 'checked' : ''?> />
             <label for="private">Private</label>
-          </div>    
+          </div>
+          <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
         </fieldset>
-        <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
         <button id="save" name='save'>Save </button>
       </form>
     </section>
