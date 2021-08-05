@@ -14,7 +14,7 @@
       </section>
       <section class="home">
         <h2>What we Offer</h2>
-        <p>A fast and easy way to organize, blah blah blah</p>
+        <p>A fast and easy way to organize your schedule. By creating time slot sheets, team members are able to more efficiently work together. Enjoy your journey! </p>
       </section>
       <section class="home">
         <h2>Meet the Creators</h2>
