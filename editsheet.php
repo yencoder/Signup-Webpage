@@ -1,30 +1,22 @@
 <?php
 require 'includes/header.php';
-//check session for whatever user info was stored
-//if(!isset($_SESSION['username'])){
-  //no user info, redirect
-//header("Location:login.php");
-//exit();
-//}
 $userid = $_SESSION['userid'];
-$sheetid = $_SESSION['sheetid'];
+$sheetid = $_GET['sheetid'];
+// CONNECT TO DATABASE
 include 'includes/library.php';
 $pdo = connectdb();
-
+// QUERY FOR SHEET INFO
 $query = "SELECT * FROM signin_info where sheetid = ?";
 $stmt=$pdo->prepare($query);
 $results = $stmt->execute([$sheetid]);
 $sheets = $stmt->fetchAll();
-
+// QUERY FOR SLOT INFO
 $query = "SELECT * FROM slot_info where sheetid = '?'"; 
 $stmt=$pdo->prepare($query);                        
 $results = $stmt->execute([$sheetid]);                
 $slots = $stmt->fetchAll();
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,9 +29,7 @@ $slots = $stmt->fetchAll();
   <body>
     <section class="signup">
           <form id="signupform" action="<?=htmlentities($_SERVER['PHP_SELF']);?>" method="post" novalidate>
-          <h2>
-              Edit Your Sign Up Sheet
-          </h2>
+          <h2>Edit Your Sign Up Sheet</h2>
             <div class="input">
                 <label for="title">Sheet Title</label>
                 <?php  foreach($sheets as $r): ?>
@@ -49,8 +39,8 @@ $slots = $stmt->fetchAll();
               </div>
               <div class="input">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="50" rows="5";><?=$description;?></textarea>              
-              </div>
+                <textarea name="description" id="description" cols="50" rows="5" value="<?=$r['description'];?>";></textarea>              
+                </div>
               <div class="input">
                 <label for="date">Time Slot</label>
                 <ol>
@@ -68,15 +58,17 @@ $slots = $stmt->fetchAll();
             </div>
               </div>
               <fieldset>
-                <legend>Privacy</legend>    
+                <legend>Privacy</legend>
+                <?php  foreach($sheets as $r): ?>
                 <div>
-                  <input id="public" name="status" type="radio" value="Y" <?=$privacy == "Y" ? 'checked' : ''?> />
+                  <input id="public" name="status" type="radio" value="Y" <?=$r['privacy'] == "Y" ? 'checked' : ''?> />
                   <label for="public">Public</label>
                 </div>
                 <div>
-                  <input id="private" name="status" type="radio" value="N" <?=$privacy == "N" ? 'checked' : ''?> />
+                  <input id="private" name="status" type="radio" value="N" <?=$r['privacy'] == "N" ? 'checked' : ''?> />
                   <label for="private">Private</label>
-                </div>          
+                </div>
+                <?php endforeach ?>       
               </fieldset>
               <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please choose one</span>
               <button id="confirm" name='confirm'>CONFIRM YOUR EDITING</button>
